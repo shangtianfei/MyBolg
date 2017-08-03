@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 配置数据库链接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/mybolg" userId="root"
+			password="root">
+		</jdbcConnection>
+		<!-- -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 指定javabean生成位置 -->
+		<javaModelGenerator targetPackage="seience.havelook.pojo"
+			targetProject=".\src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 指定sql映射文件生成文件位置 -->
+		<sqlMapGenerator targetPackage="seience.havelook.dao"
+			targetProject=".\src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 指定dao接口生成位置 ，mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="seience.havelook.dao" targetProject=".\src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 指定每个标的生成策略 -->
+		<!-- 指定每个标的生成策略 -->
+		<table tableName="article" domainObjectName="Article">		</table>
+		<table tableName="category" domainObjectName="Category"></table>
+
+		<!-- <table schema="general" tableName="category" domainObjectName="Category" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="ture" selectByExampleQueryId="false" > <property name="useActualColumnNames" 
+			value="false"/> </table> <table schema="general" tableName="article" domainObjectName="Article" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" selectByExampleQueryId="false" > <property 
+			name="useActualColumnNames" value="false"/> </table> -->
+
+	</context>
+</generatorConfiguration>
