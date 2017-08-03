@@ -37,13 +37,13 @@
 		</javaClientGenerator>
 		<!-- 指定每个标的生成策略 -->
 		<!-- 指定每个标的生成策略 -->
-		<table tableName="article" domainObjectName="Article">		</table>
+		<table tableName="article" domainObjectName="Article"></table>
 		<table tableName="category" domainObjectName="Category"></table>
-
-		<!-- <table schema="general" tableName="category" domainObjectName="Category" 
+		<table schema="general" tableName="usermanager" domainObjectName="Usermanager" 
 			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="ture" selectByExampleQueryId="false" > <property name="useActualColumnNames" 
-			value="false"/> </table> <table schema="general" tableName="article" domainObjectName="Article" 
+			value="false"/> </table> 
+			<!--<table schema="general" tableName="article" domainObjectName="Article" 
 			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" selectByExampleQueryId="false" > <property 
 			name="useActualColumnNames" value="false"/> </table> -->

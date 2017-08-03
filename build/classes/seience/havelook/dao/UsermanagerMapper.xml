@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seience.havelook.dao.UsermanagerMapper">
+  <resultMap id="BaseResultMap" type="seience.havelook.pojo.Usermanager">
+    <id column="id" jdbcType="TINYINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="timestamp" jdbcType="INTEGER" property="timestamp" />
+    <result column="ip" jdbcType="INTEGER" property="ip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, timestamp, ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Byte" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from usermanager
+    where id = #{id,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
+    delete from usermanager
+    where id = #{id,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="seience.havelook.pojo.Usermanager">
+    insert into usermanager (id, username, password, 
+      timestamp, ip)
+    values (#{id,jdbcType=TINYINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, 
+      #{timestamp,jdbcType=INTEGER}, #{ip,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="seience.havelook.pojo.Usermanager">
+    insert into usermanager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=TINYINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="seience.havelook.pojo.Usermanager">
+    update usermanager
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="seience.havelook.pojo.Usermanager">
+    update usermanager
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      timestamp = #{timestamp,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=INTEGER}
+    where id = #{id,jdbcType=TINYINT}
+  </update>
+</mapper>

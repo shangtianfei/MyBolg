@@ -1,9 +1,7 @@
 package seience.havelook.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
-
 import seience.havelook.pojo.Article;
 import seience.havelook.pojo.ArticleExample;
 import seience.havelook.pojo.ArticleWithBLOBs;
@@ -22,8 +20,6 @@ public interface ArticleMapper {
     List<ArticleWithBLOBs> selectByExampleWithBLOBs(ArticleExample example);
 
     List<Article> selectByExample(ArticleExample example);
-    
-    List<Article> selectByExampleWithCategory();
 
     ArticleWithBLOBs selectByPrimaryKey(Integer articleId);
 
@@ -38,4 +34,6 @@ public interface ArticleMapper {
     int updateByPrimaryKeyWithBLOBs(ArticleWithBLOBs record);
 
     int updateByPrimaryKey(Article record);
+
+	List<Article> selectByExampleWithCategory();
 }

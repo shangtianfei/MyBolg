@@ -5,8 +5,8 @@
     <id column="article_id" jdbcType="INTEGER" property="articleId" />
     <result column="article_name" jdbcType="VARCHAR" property="articleName" />
     <result column="article_author" jdbcType="VARCHAR" property="articleAuthor" />
-    <result column="publish_time" jdbcType="DATE" property="publishTime" />
-    <result column="modify_time" jdbcType="INTEGER" property="modifyTime" />
+    <result column="publish_time" jdbcType="VARCHAR" property="publishTime" />
+    <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="article_keyword" jdbcType="VARCHAR" property="articleKeyword" />
     <result column="article_img" jdbcType="VARCHAR" property="articleImg" />
@@ -19,7 +19,7 @@
     <result column="article_desc" jdbcType="LONGVARCHAR" property="articleDesc" />
     <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
   </resultMap>
-   <resultMap type="seience.havelook.pojo.Article" id="ArticleWithCategoryMap">
+    <resultMap type="seience.havelook.pojo.Article" id="ArticleWithCategoryMap">
 	    <id column="article_id" jdbcType="INTEGER" property="articleId" />
 	    <result column="article_name" jdbcType="VARCHAR" property="articleName" />
 	    <result column="article_author" jdbcType="VARCHAR" property="articleAuthor" />
@@ -130,17 +130,7 @@
       order by ${orderByClause}
     </if>
   </select>
- 
-   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </select>
- 
-  <select id="selectByExampleWithCategory"  resultMap="ArticleWithCategoryMap">
+   <select id="selectByExampleWithCategory"  resultMap="ArticleWithCategoryMap">
     SELECT 
 		a.article_id, 
 		a.article_name, 
@@ -152,6 +142,14 @@
 		a.article_view,
 		a.article_love
     FROM article a LEFT JOIN category c ON a.category_id = c.category_id
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where article_id = #{articleId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
@@ -170,7 +168,7 @@
       is_top, article_view, article_love, 
       article_desc, article_content)
     values (#{articleId,jdbcType=INTEGER}, #{articleName,jdbcType=VARCHAR}, #{articleAuthor,jdbcType=VARCHAR}, 
-      #{publishTime,jdbcType=DATE}, #{modifyTime,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, 
+      #{publishTime,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
       #{articleKeyword,jdbcType=VARCHAR}, #{articleImg,jdbcType=VARCHAR}, #{articleThumb,jdbcType=VARCHAR}, 
       #{isTop,jdbcType=INTEGER}, #{articleView,jdbcType=INTEGER}, #{articleLove,jdbcType=INTEGER}, 
       #{articleDesc,jdbcType=LONGVARCHAR}, #{articleContent,jdbcType=LONGVARCHAR})
@@ -178,7 +176,7 @@
   <insert id="insertSelective" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId = null">
+      <if test="articleId != null">
         article_id,
       </if>
       <if test="articleName != null">
@@ -222,8 +220,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId = null">
-        null
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
       </if>
       <if test="articleName != null">
         #{articleName,jdbcType=VARCHAR},
@@ -232,10 +230,10 @@
         #{articleAuthor,jdbcType=VARCHAR},
       </if>
       <if test="publishTime != null">
-        #{publishTime,jdbcType=DATE},
+        #{publishTime,jdbcType=VARCHAR},
       </if>
       <if test="modifyTime != null">
-        #{modifyTime,jdbcType=INTEGER},
+        #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
         #{categoryId,jdbcType=INTEGER},
@@ -285,10 +283,10 @@
         article_author = #{record.articleAuthor,jdbcType=VARCHAR},
       </if>
       <if test="record.publishTime != null">
-        publish_time = #{record.publishTime,jdbcType=DATE},
+        publish_time = #{record.publishTime,jdbcType=VARCHAR},
       </if>
       <if test="record.modifyTime != null">
-        modify_time = #{record.modifyTime,jdbcType=INTEGER},
+        modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="record.categoryId != null">
         category_id = #{record.categoryId,jdbcType=INTEGER},
@@ -327,8 +325,8 @@
     set article_id = #{record.articleId,jdbcType=INTEGER},
       article_name = #{record.articleName,jdbcType=VARCHAR},
       article_author = #{record.articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{record.publishTime,jdbcType=DATE},
-      modify_time = #{record.modifyTime,jdbcType=INTEGER},
+      publish_time = #{record.publishTime,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
       article_keyword = #{record.articleKeyword,jdbcType=VARCHAR},
       article_img = #{record.articleImg,jdbcType=VARCHAR},
@@ -347,8 +345,8 @@
     set article_id = #{record.articleId,jdbcType=INTEGER},
       article_name = #{record.articleName,jdbcType=VARCHAR},
       article_author = #{record.articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{record.publishTime,jdbcType=DATE},
-      modify_time = #{record.modifyTime,jdbcType=INTEGER},
+      publish_time = #{record.publishTime,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
       article_keyword = #{record.articleKeyword,jdbcType=VARCHAR},
       article_img = #{record.articleImg,jdbcType=VARCHAR},
@@ -370,10 +368,10 @@
         article_author = #{articleAuthor,jdbcType=VARCHAR},
       </if>
       <if test="publishTime != null">
-        publish_time = #{publishTime,jdbcType=DATE},
+        publish_time = #{publishTime,jdbcType=VARCHAR},
       </if>
       <if test="modifyTime != null">
-        modify_time = #{modifyTime,jdbcType=INTEGER},
+        modify_time = #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
         category_id = #{categoryId,jdbcType=INTEGER},
@@ -409,8 +407,8 @@
     update article
     set article_name = #{articleName,jdbcType=VARCHAR},
       article_author = #{articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{publishTime,jdbcType=DATE},
-      modify_time = #{modifyTime,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
       article_keyword = #{articleKeyword,jdbcType=VARCHAR},
       article_img = #{articleImg,jdbcType=VARCHAR},
@@ -426,8 +424,8 @@
     update article
     set article_name = #{articleName,jdbcType=VARCHAR},
       article_author = #{articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{publishTime,jdbcType=DATE},
-      modify_time = #{modifyTime,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
       article_keyword = #{articleKeyword,jdbcType=VARCHAR},
       article_img = #{articleImg,jdbcType=VARCHAR},

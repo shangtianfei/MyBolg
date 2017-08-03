@@ -1,7 +1,5 @@
 package seience.havelook.pojo;
 
-import java.util.Date;
-
 public class Article {
     private Integer articleId;
 
@@ -9,9 +7,9 @@ public class Article {
 
     private String articleAuthor;
 
-    private Date publishTime;
+    private String publishTime;
 
-    private Integer modifyTime;
+    private String modifyTime;
 
     private Integer categoryId;
 
@@ -27,16 +25,16 @@ public class Article {
 
     private Integer articleLove;
 
-	private Category category;
-
-	public Category getCategory() {
+    private Category category;
+    public Category getCategory() {
 		return category;
 	}
 
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-    public Integer getArticleId() {
+
+	public Integer getArticleId() {
         return articleId;
     }
 
@@ -60,20 +58,20 @@ public class Article {
         this.articleAuthor = articleAuthor == null ? null : articleAuthor.trim();
     }
 
-    public Date getPublishTime() {
+    public String getPublishTime() {
         return publishTime;
     }
 
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
+    public void setPublishTime(String publishTime) {
+        this.publishTime = publishTime == null ? null : publishTime.trim();
     }
 
-    public Integer getModifyTime() {
+    public String getModifyTime() {
         return modifyTime;
     }
 
-    public void setModifyTime(Integer modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime == null ? null : modifyTime.trim();
     }
 
     public Integer getCategoryId() {

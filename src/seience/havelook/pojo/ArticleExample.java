@@ -1,8 +1,6 @@
 package seience.havelook.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class ArticleExample {
@@ -104,32 +102,6 @@ public class ArticleExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andArticleIdIsNull() {
@@ -342,53 +314,63 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeEqualTo(Date value) {
-            addCriterionForJDBCDate("publish_time =", value, "publishTime");
+        public Criteria andPublishTimeEqualTo(String value) {
+            addCriterion("publish_time =", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("publish_time <>", value, "publishTime");
+        public Criteria andPublishTimeNotEqualTo(String value) {
+            addCriterion("publish_time <>", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("publish_time >", value, "publishTime");
+        public Criteria andPublishTimeGreaterThan(String value) {
+            addCriterion("publish_time >", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("publish_time >=", value, "publishTime");
+        public Criteria andPublishTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("publish_time >=", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeLessThan(Date value) {
-            addCriterionForJDBCDate("publish_time <", value, "publishTime");
+        public Criteria andPublishTimeLessThan(String value) {
+            addCriterion("publish_time <", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("publish_time <=", value, "publishTime");
+        public Criteria andPublishTimeLessThanOrEqualTo(String value) {
+            addCriterion("publish_time <=", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeIn(List<Date> values) {
-            addCriterionForJDBCDate("publish_time in", values, "publishTime");
+        public Criteria andPublishTimeLike(String value) {
+            addCriterion("publish_time like", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("publish_time not in", values, "publishTime");
+        public Criteria andPublishTimeNotLike(String value) {
+            addCriterion("publish_time not like", value, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("publish_time between", value1, value2, "publishTime");
+        public Criteria andPublishTimeIn(List<String> values) {
+            addCriterion("publish_time in", values, "publishTime");
             return (Criteria) this;
         }
 
-        public Criteria andPublishTimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("publish_time not between", value1, value2, "publishTime");
+        public Criteria andPublishTimeNotIn(List<String> values) {
+            addCriterion("publish_time not in", values, "publishTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishTimeBetween(String value1, String value2) {
+            addCriterion("publish_time between", value1, value2, "publishTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishTimeNotBetween(String value1, String value2) {
+            addCriterion("publish_time not between", value1, value2, "publishTime");
             return (Criteria) this;
         }
 
@@ -402,52 +384,62 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeEqualTo(Integer value) {
+        public Criteria andModifyTimeEqualTo(String value) {
             addCriterion("modify_time =", value, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeNotEqualTo(Integer value) {
+        public Criteria andModifyTimeNotEqualTo(String value) {
             addCriterion("modify_time <>", value, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeGreaterThan(Integer value) {
+        public Criteria andModifyTimeGreaterThan(String value) {
             addCriterion("modify_time >", value, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andModifyTimeGreaterThanOrEqualTo(String value) {
             addCriterion("modify_time >=", value, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeLessThan(Integer value) {
+        public Criteria andModifyTimeLessThan(String value) {
             addCriterion("modify_time <", value, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andModifyTimeLessThanOrEqualTo(String value) {
             addCriterion("modify_time <=", value, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeIn(List<Integer> values) {
+        public Criteria andModifyTimeLike(String value) {
+            addCriterion("modify_time like", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeNotLike(String value) {
+            addCriterion("modify_time not like", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeIn(List<String> values) {
             addCriterion("modify_time in", values, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeNotIn(List<Integer> values) {
+        public Criteria andModifyTimeNotIn(List<String> values) {
             addCriterion("modify_time not in", values, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeBetween(Integer value1, Integer value2) {
+        public Criteria andModifyTimeBetween(String value1, String value2) {
             addCriterion("modify_time between", value1, value2, "modifyTime");
             return (Criteria) this;
         }
 
-        public Criteria andModifyTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andModifyTimeNotBetween(String value1, String value2) {
             addCriterion("modify_time not between", value1, value2, "modifyTime");
             return (Criteria) this;
         }

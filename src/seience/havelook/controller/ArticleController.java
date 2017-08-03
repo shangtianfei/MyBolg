@@ -1,5 +1,6 @@
 package seience.havelook.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -43,16 +44,19 @@ public class ArticleController {
 	// 执行保存或更新
 	@RequestMapping("/edit/saveOrUpdate")
 	public @ResponseBody void toEditShow(QueryVo vo) {
+		 Date currentTime = new Date();
+		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+		 
 		
 		ArticleWithBLOBs articleWithBLOBs = new ArticleWithBLOBs();
 		articleWithBLOBs.setArticleContent(vo.getArticle_content());
 		articleWithBLOBs.setArticleName(vo.getArticle_name());
 		articleWithBLOBs.setCategoryId(vo.getCategory_id());
 		if(vo.getArticle_id() != null){
-//			articleWithBLOBs.setModifyTime(new Date());
+			articleWithBLOBs.setModifyTime(formatter.format(currentTime));
 			articleService.updateByPrimaryKeyWithBLOBs(articleWithBLOBs);
 		}else {
-			articleWithBLOBs.setPublishTime(new Date());
+			articleWithBLOBs.setPublishTime(formatter.format(currentTime));
 			articleService.insertSelective(articleWithBLOBs);
 		}
 	}
