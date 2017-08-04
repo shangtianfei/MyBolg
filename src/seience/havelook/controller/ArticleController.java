@@ -45,7 +45,7 @@ public class ArticleController {
 	@RequestMapping("/edit/saveOrUpdate")
 	public @ResponseBody void toEditShow(QueryVo vo) {
 		 Date currentTime = new Date();
-		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 
 		
 		ArticleWithBLOBs articleWithBLOBs = new ArticleWithBLOBs();
@@ -53,18 +53,20 @@ public class ArticleController {
 		articleWithBLOBs.setArticleName(vo.getArticle_name());
 		articleWithBLOBs.setCategoryId(vo.getCategory_id());
 		if(vo.getArticle_id() != null){
+			articleWithBLOBs.setArticleId(vo.getArticle_id());
 			articleWithBLOBs.setModifyTime(formatter.format(currentTime));
-			articleService.updateByPrimaryKeyWithBLOBs(articleWithBLOBs);
+			articleService.updateByPrimaryKeySelective(articleWithBLOBs);
 		}else {
 			articleWithBLOBs.setPublishTime(formatter.format(currentTime));
 			articleService.insertSelective(articleWithBLOBs);
 		}
 	}
 
-	// 删除
+	// 删除  不加@ResponseBody在ajax就没有返回值
 	@RequestMapping("/edit/deleteEdit")
-	public void deleteEdit(Integer articleId) {
+	public @ResponseBody String deleteEdit(Integer articleId) {
 		articleService.deleteByPrimaryKey(articleId);
+		return "OK";
 	}
 	
 	// 修改————————RestFul风格的开发

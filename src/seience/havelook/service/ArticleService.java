@@ -38,9 +38,9 @@ public class ArticleService {
 		return articleMapper.selectByExampleWithCategory();
 	}
 
-	public void updateByPrimaryKeyWithBLOBs(ArticleWithBLOBs articleWithBLOBs) {
+	public void updateByPrimaryKeySelective(ArticleWithBLOBs articleWithBLOBs) {
 		// TODO Auto-generated method stub
-		articleMapper.updateByPrimaryKeyWithBLOBs(articleWithBLOBs);
+		articleMapper.updateByPrimaryKeySelective(articleWithBLOBs);
 	}
 
 	

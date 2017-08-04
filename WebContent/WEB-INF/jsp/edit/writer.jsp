@@ -21,6 +21,9 @@
 <link rel="shortcut icon"
 	href="<%=basePath%>static/medit/images/logos/favicon.ico"
 	type="image/x-icon" />
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 	<div id="layout" style="background: #f6f6f6;">
@@ -39,18 +42,50 @@
 				placeholder="输入题目..." value="${articleWithBLOBs.articleName }">
 		</div>
 		<div class="col-sm-2">
-			<select class="form-control" id="category_id">
-				<c:forEach items="${categoryList}" var="clist">
-					<option value="${clist.categoryId}">${clist.categoryName }</option>
-				</c:forEach>
+			<select class="form-control" id="category_id" >
+			   <div id="categoryList_div">
+				    <c:forEach items="${categoryList}" var="clist">
+						<option value="${clist.categoryId}">${clist.categoryName }</option>
+					</c:forEach>
+				</div>
 			</select>
 		</div>
-		<button class="btn btn-primary" id="get-md-btn">发布</button>
+			<!-- <button type="button" class="btn btn-default" id="addTag">添加分类</button> -->
+			<p class="popover-options">
+				<button  class="btn btn-primary btn-xs" title="<h2>addTag</h2>"  
+				   data-container="body"  data-placement="top"  data-toggle="popover" data-content=" <input type='text' id='category_name'/><button type='button' onclick='addTagButton()'>添加</button>">
+					添加分类
+				</button>
+				<button type="button" class="btn btn-default" id="get-md-btn">发布</button>
+			</p>
 		<div id="editormd">
+					 <textarea style="display: none;">${articleWithBLOBs.articleContent }</textarea>
 		</div>
 		<script src="<%=basePath%>static/medit/examples/js/jquery.min.js"></script>
 		<script src="<%=basePath%>static/medit/editormd.min.js"></script>
+		<script src="<%=basePath%>static/js/bootstrap.min.js"></script>
+		
 		<script type="text/javascript">
+			function addTagButton(){
+				$.ajax({
+					type:"post",
+					url:"<%=basePath%>category/add",
+					data : {
+						"category_name" : $("#category_name").val()
+					},
+					success : function(data) {
+						//清除select里面的数据
+						//$("#category_id").empty();
+						$("#categoryList_div").html("");
+						var categoryList = data;
+						$.each(categoryList, function(index, clist){
+							var selectForEach = "<option value="+clist.categoryId+">"+clist.categoryId+"</option>";
+							$("#categoryList_div").append(selectForEach);
+						});
+						alert("添加成功");
+					}
+				});
+			};
             var testEditor;            
             $(function() {
             	
@@ -118,14 +153,9 @@
 					type:"post",
 					url:"<%=basePath%>edit/saveOrUpdate",
 												data : {
-													"article_content" : testEditor
-															.getMarkdown(),
-													"article_name" : $(
-															"#article_name")
-															.val(),
-													"category_id" : $(
-															"#category_id")
-															.val()
+													"article_content" : testEditor.getMarkdown(),
+													"article_name" : $("#article_name").val(),
+													"category_id" : $("#category_id").val()
 												},
 												success : function(data) {
 													window.location.href = 'http://localhost:8080/mybolg/admin';
@@ -161,7 +191,9 @@
 				$("#open-help-dialog").bind('click', function() {
 					$.proxy(testEditor.toolbarHandlers.help, testEditor)();
 				});
-
+				
+				$(function () { $(".popover-options button").popover({html : true });});
+				
 			});
 		</script>
 

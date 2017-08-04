@@ -176,7 +176,8 @@
 						</div> <!-- /input-group -->
 					</li>
 					<li><a href="toEdit" class="active"><i class="fa fa-edit fa-fw"></i> 新建文章</a></li>
-					<li><a href="#" ><i class="glyphicon glyphicon-envelope"></i> 文章管理</a></li>
+					<li><a href="salevisit.action"><i class="glyphicon glyphicon-align-right"></i> 分类管理</a></li>
+					<li><a href="salevisit.action" ><i class="glyphicon glyphicon-envelope"></i> 文章管理</a></li>
 					<li><a href="salevisit.action"><i class="fa fa-dashboard fa-fw"></i> 访问管理</a></li>
 				</ul>
 			</div>
@@ -211,7 +212,6 @@
 								</c:forEach>
 							</select>
 						</div>
-		
 						<button type="submit" class="btn btn-primary">搜索</button>
 					</form>
 				</div>
@@ -264,7 +264,6 @@
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
-
 	<!-- jQuery -->
 	<script src="<%=basePath%>static/js/jquery.min.js"></script>
 
@@ -282,32 +281,6 @@
 	<script src="<%=basePath%>static/js/sb-admin-2.js"></script>
 
 	<script type="text/javascript">
-		function editCustomer(id) {
-			$.ajax({
-				type:"get",
-				url:"<%=basePath%>customer/edit.action",
-				data:{"id":id},
-				success:function(data) {
-					$("#edit_cust_id").val(data.cust_id);
-					$("#edit_customerName").val(data.cust_name);
-					$("#edit_customerFrom").val(data.cust_source)
-					$("#edit_custIndustry").val(data.cust_industry)
-					$("#edit_custLevel").val(data.cust_level)
-					$("#edit_linkMan").val(data.cust_linkman);
-					$("#edit_phone").val(data.cust_phone);
-					$("#edit_mobile").val(data.cust_mobile);
-					$("#edit_zipcode").val(data.cust_zipcode);
-					$("#edit_address").val(data.cust_address);
-				}
-			});
-		}
-		function updateCustomer() {
-			$.post("<%=basePath%>customer/update.action",$("#edit_customer_form").serialize(),function(data){
-				alert("客户信息更新成功！");
-				window.location.reload();
-			});
-		}
-		
 		function deleteEdit(articleId) {
 			 if(confirm('确实要删除这篇文章吗?')) {
 				 $.ajax({
@@ -315,7 +288,8 @@
 						url:"<%=basePath%>edit/deleteEdit",
 						data:{"articleId":articleId},
 						success:function(data) {
-							window.location.href='http://localhost:8080/mybolg/admin';	
+							alert("客户文章成功！");
+							window.location.reload();
 						}
 					});
 			} 

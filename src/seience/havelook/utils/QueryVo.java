@@ -6,7 +6,15 @@ public class QueryVo {
 	private String article_name;
 	private Integer category_id;
 	private Integer article_id;
+	private String category_name;
 	
+	
+	public String getCategory_name() {
+		return category_name;
+	}
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
 	public Integer getArticle_id() {
 		return article_id;
 	}
