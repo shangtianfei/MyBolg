@@ -229,6 +229,7 @@
 									<th>文章类别</th>
 									<th>文章作者</th>
 									<th>发布时间</th>
+									<th>修改时间</th>
 									<th>查看人数</th>
 									<th>点赞数</th>
 									<th>操作</th>
@@ -242,6 +243,7 @@
 										<td>${articleList.category.categoryName}</td>
 										<td>${articleList.articleAuthor}</td>
 										<td>${articleList.publishTime}</td>
+										<td>${articleList.modifyTime}</td>
 										<td>${articleList.articleView}</td>
 										<td>${articleList.articleLove}</td>
 										<td>

@@ -21,9 +21,6 @@
 <link rel="shortcut icon"
 	href="<%=basePath%>static/medit/images/logos/favicon.ico"
 	type="image/x-icon" />
-<script type="text/javascript">
-
-</script>
 </head>
 <body>
 	<div id="layout" style="background: #f6f6f6;">
@@ -35,8 +32,8 @@
 			<button id="show-toolbar-btn">显示工具栏</button>
 			<button id="close-toolbar-btn">隐藏工具栏</button>
 			<button id="open-help-dialog">使用帮助</button>
-		</div>
-
+		</div>	
+		<input type="hidden" id="article_id" value="${articleWithBLOBs.articleId }"/>
 		<div class="col-xs-8">
 			<input type="text" class="form-control" id="article_name"
 				placeholder="输入题目..." value="${articleWithBLOBs.articleName }">
@@ -52,11 +49,17 @@
 		</div>
 			<!-- <button type="button" class="btn btn-default" id="addTag">添加分类</button> -->
 			<p class="popover-options">
-				<button  class="btn btn-primary btn-xs" title="<h2>addTag</h2>"  
+				<button id="addTagButton_button" class="btn btn-primary btn-xs" title="<h2>addTag</h2>"  
 				   data-container="body"  data-placement="top"  data-toggle="popover" data-content=" <input type='text' id='category_name'/><button type='button' onclick='addTagButton()'>添加</button>">
 					添加分类
 				</button>
-				<button type="button" class="btn btn-default" id="get-md-btn">发布</button>
+				<c:set var="salary" scope="session" value="${articleWithBLOBs.articleId }"/>
+				<c:if test="${salary > 0}">
+				   <button class="btn btn-primary" id="get-md-btn">发布更新</button>
+				</c:if>
+				<c:if test="${salary == null}">
+				   	<button type="button" class="btn btn-default" id="get-md-btn">发布</button>
+				</c:if>
 			</p>
 		<div id="editormd">
 					 <textarea style="display: none;">${articleWithBLOBs.articleContent }</textarea>
@@ -73,15 +76,19 @@
 					data : {
 						"category_name" : $("#category_name").val()
 					},
+					dataType:"json",
 					success : function(data) {
-						//清除select里面的数据
-						//$("#category_id").empty();
-						$("#categoryList_div").html("");
+						/* for(i=0;i<data.length;i++){
+							 var name=data[i].categoryName;
+							 alert("name:"+name+"\n");
+							  }*/
+						$("#category_id").empty();//清除select里面的数据
 						var categoryList = data;
 						$.each(categoryList, function(index, clist){
-							var selectForEach = "<option value="+clist.categoryId+">"+clist.categoryId+"</option>";
-							$("#categoryList_div").append(selectForEach);
+							var selectForEach = "<option value="+clist.categoryId+">"+clist.categoryName+"</option>";
+							$("#category_id").append(selectForEach);
 						});
+						$('#addTagButton_button').popover('hide')
 						alert("添加成功");
 					}
 				});
@@ -155,7 +162,8 @@
 												data : {
 													"article_content" : testEditor.getMarkdown(),
 													"article_name" : $("#article_name").val(),
-													"category_id" : $("#category_id").val()
+													"category_id" : $("#category_id").val(),
+													"article_id":$("#article_id").val()
 												},
 												success : function(data) {
 													window.location.href = 'http://localhost:8080/mybolg/admin';

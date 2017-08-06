@@ -1,5 +1,7 @@
 package seience.havelook.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +17,11 @@ public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 	@RequestMapping("/category/add")
-	public @ResponseBody String insertSelective(QueryVo vo) {
+	@ResponseBody
+	public  List<Category> insertSelective(QueryVo vo) {
+		//添加类别
 		categoryService.insertSelective(vo);
-		return "OK";
+		List<Category> categoryList = categoryService.selectByExample();
+		return  categoryList;//查询类别
 	}
 }

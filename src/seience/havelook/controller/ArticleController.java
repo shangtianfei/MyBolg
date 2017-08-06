@@ -25,6 +25,18 @@ public class ArticleController {
 	@Autowired
 	CategoryService categoryService;
 
+	@RequestMapping("/index")
+	public String toIndex(Model model) {
+		// 查询出所有文章，放置前台
+		List<Article> articleList = articleService.selectByExampleWithCategory();
+		model.addAttribute("articleList", articleList);
+		
+		//查询出所有类别
+		List<Category> categoryList = categoryService.selectByExample();
+		model.addAttribute("categoryList", categoryList);
+		return "index";
+	}
+
 	@RequestMapping("/admin")
 	public String queryArticleList(Model model) {
 		// 查询出所有文章，放置后台
@@ -44,41 +56,48 @@ public class ArticleController {
 	// 执行保存或更新
 	@RequestMapping("/edit/saveOrUpdate")
 	public @ResponseBody void toEditShow(QueryVo vo) {
-		 Date currentTime = new Date();
-		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		 
-		
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 		ArticleWithBLOBs articleWithBLOBs = new ArticleWithBLOBs();
 		articleWithBLOBs.setArticleContent(vo.getArticle_content());
 		articleWithBLOBs.setArticleName(vo.getArticle_name());
 		articleWithBLOBs.setCategoryId(vo.getCategory_id());
-		if(vo.getArticle_id() != null){
+		if (vo.getArticle_id() != null) {
 			articleWithBLOBs.setArticleId(vo.getArticle_id());
 			articleWithBLOBs.setModifyTime(formatter.format(currentTime));
 			articleService.updateByPrimaryKeySelective(articleWithBLOBs);
-		}else {
+		} else {
 			articleWithBLOBs.setPublishTime(formatter.format(currentTime));
 			articleService.insertSelective(articleWithBLOBs);
 		}
 	}
 
-	// 删除  不加@ResponseBody在ajax就没有返回值
+	// 删除 不加@ResponseBody在ajax就没有返回值
 	@RequestMapping("/edit/deleteEdit")
 	public @ResponseBody String deleteEdit(Integer articleId) {
 		articleService.deleteByPrimaryKey(articleId);
 		return "OK";
 	}
-	
+
 	// 修改————————RestFul风格的开发
-	@RequestMapping("edit/updateEdit/{articleId}")
+	@RequestMapping("/edit/updateEdit/{articleId}")
 	public String updateEdit(@PathVariable Integer articleId, Model model) {
-		
-        ArticleWithBLOBs articleWithBLOBs = articleService.selectByPrimaryKey(articleId);
-        model.addAttribute("articleWithBLOBs", articleWithBLOBs);
-        
-        List<Category> categoryList = categoryService.selectByExample();
+
+		ArticleWithBLOBs articleWithBLOBs = articleService.selectByPrimaryKey(articleId);
+		model.addAttribute("articleWithBLOBs", articleWithBLOBs);
+
+		List<Category> categoryList = categoryService.selectByExample();
 		model.addAttribute("categoryList", categoryList);
-		return "edit/updatewriter";
+		return "edit/writer";
 	}
 	
+//	查看文章详细内容
+	@RequestMapping("/selectByPrimaryKey/{articleId}")
+	public String selectByPrimaryKey(@PathVariable Integer articleId, Model model) {
+		ArticleWithBLOBs articleWithBLOBs = articleService.selectByPrimaryKey(articleId);
+		model.addAttribute("articleWithBLOBs", articleWithBLOBs);
+		return "edit/independentShow";
+	}
+
 }
