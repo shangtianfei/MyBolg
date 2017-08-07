@@ -16,12 +16,29 @@
 	href="<%=basePath%>static/medit/css/editormd.preview.css" />
 <link rel="stylesheet"
 	href="<%=basePath%>static/medit/examples/css/style.css" />
+<<<<<<< HEAD
 </head>
 <body>
 	<div align="center">
 		<div id="layout" style="width: 70%;">
 		    <jsp:include page="/WEB-INF/jsp/nav.jsp"></jsp:include>
 		    <h2>${articleWithBLOBs.articleName }</h2>
+=======
+<link href="<%=basePath%>static/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+	<jsp:include page="/WEB-INF/jsp/nav.jsp" />
+	<div align="center">
+		<div id="layout" style="width: 55%;">
+            <div id="head-div" class="page-header">
+            <h1><b>${articleWithBLOBs.articleName }</b></h1>
+			        <span class="glyphicon glyphicon-user"> ${articleWithBLOBs.articleAuthor }</span>&nbsp;
+		            <span class="glyphicon glyphicon-tags"> ${articleWithBLOBs.categoryId }</span>&nbsp;
+		            <span class="glyphicon glyphicon-time"> ${articleWithBLOBs.publishTime }</span>&nbsp;
+		            <span class="glyphicon glyphicon-paperclip"> ${articleWithBLOBs.articleView }评论</span>
+			</div>
+>>>>>>> 2017_8_6_2
 			<div id="test-editormd-view2">
 				<textarea id="append-test" style="display: none;">${articleWithBLOBs.articleContent }</textarea>
 			</div>
@@ -46,7 +63,11 @@
 		$(function() {
 			var testEditormdView, testEditormdView2;
 
+<<<<<<< HEAD
 			$.get("medie_md.jsp", function(markdown) {
+=======
+			$.get("<%=basePath%>medie_md.jsp", function(markdown) {
+>>>>>>> 2017_8_6_2
 
 				testEditormdView = editormd.markdownToHTML(
 						"test-editormd-view", {

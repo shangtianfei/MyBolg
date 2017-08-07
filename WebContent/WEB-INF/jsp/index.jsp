@@ -26,6 +26,7 @@
 <link href="<%=basePath%>static/css/boot-crm.css" rel="stylesheet"
 	type="text/css">
 </head>
+<<<<<<< HEAD
 <body>
 	<!-- <a href="admin">后台</a>
 	<hr /> -->
@@ -81,6 +82,13 @@
 				</div>
 
 				</nav>
+=======
+<body> 
+<jsp:include page="/WEB-INF/jsp/nav.jsp"></jsp:include>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+>>>>>>> 2017_8_6_2
 				<div class="row clearfix">
 					<div class="col-md-2 column">
 						<address>
