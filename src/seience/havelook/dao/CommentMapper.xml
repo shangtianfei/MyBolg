@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seience.havelook.dao.CommentMapper">
+	<resultMap id="BaseResultMap" type="seience.havelook.pojo.Comment">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="pid" jdbcType="INTEGER" property="pid" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="img_url" jdbcType="VARCHAR" property="img_url" />
+		<result column="like_count" jdbcType="INTEGER" property="like_count" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="timestamp" jdbcType="VARCHAR" property="timestamp" />
+		<result column="is_checked" jdbcType="TINYINT" property="is_checked" />
+		<result column="article_id" jdbcType="INTEGER" property="article_id" />
+		<result column="useremail" jdbcType="VARCHAR" property="useremail" />
+		<result column="web_likes" jdbcType="VARCHAR" property="web_likes" />
+	</resultMap>
+
+	<resultMap extends="BaseResultMap" type="seience.havelook.pojo.Comment"
+		id="BaseResultMapWithArticle">
+		<!-- <id column="id" jdbcType="INTEGER" property="id" /> <result column="username" 
+			jdbcType="VARCHAR" property="username" /> <result column="timestamp" jdbcType="VARCHAR" 
+			property="timestamp" /> <result column="article_id" jdbcType="INTEGER" property="article_id" 
+			/> <result column="web_likes" jdbcType="VARCHAR" property="web_likes" /> -->
+		<!-- 一对一 -->
+		<association property="article" javaType="seience.havelook.pojo.Article">
+			<id column="article_id" jdbcType="INTEGER" property="article_id" />
+			<result column="article_name" jdbcType="VARCHAR" property="article_name" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, pid, username, img_url, like_count, content, timestamp,
+		is_checked,
+		article_id,
+		useremail, web_likes
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from comment
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- List<Comment> selectCommentListNotAccess(@Param("checkedNumber")Byte 
+		checkedNumber); -->
+	<select id="selectCommentListNotAccess" resultMap="BaseResultMapWithArticle">
+		SELECT
+		c.id,
+		a.article_name,
+		a.article_id,
+		c.is_checked,
+		c.pid,
+		c.username,
+		c.content,
+		c.web_likes,
+		c.useremail,
+		c.timestamp
+		FROM article a LEFT JOIN comment c ON a.article_id = c.article_id
+		WHERE
+		is_checked >= #{checkedNumber,jdbcType=TINYINT} ORDER BY c.id DESC
+	</select>
+
+	<!-- List<Comment> selectCommentListByCheckedNumber(Byte checkedNumber); -->
+	<select id="selectCommentListByCheckedNumber" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from comment
+		where is_checked = #{checkedNumber,jdbcType=TINYINT} and
+		article_id = #{article_id,jdbcType=INTEGER}
+	</select>
+
+	<!-- List<Comment> selectRecentNewsOrderByDescWithLimit(Integer commentLimit); -->
+
+	<select id="selectRecentNewsOrderByDescWithLimit" resultMap="BaseResultMapWithArticle">
+		SELECT
+		c.id,
+		c.article_id,
+		c.username,
+		c.web_likes,
+		c.timestamp,
+		a.article_name
+		FROM
+		comment c LEFT JOIN article a
+		ON c.article_id =
+		a.article_id
+		where c.is_checked = #{checkedNumber,jdbcType=TINYINT}
+		ORDER BY c.id DESC LIMIT #{commentLimit,jdbcType=INTEGER}
+		<!-- select <include refid="Base_Column_List" /> from comment where is_checked 
+			= #{checkedNumber,jdbcType=TINYINT} -->
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		comment
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="seience.havelook.pojo.Comment">
+		insert into comment (id, pid,
+		username,
+		img_url, like_count, content,
+		timestamp, is_checked,
+		article_id,
+		useremail, web_likes)
+		values (#{id,jdbcType=INTEGER},
+		#{pid,jdbcType=INTEGER},
+		#{username,jdbcType=VARCHAR},
+		#{img_url,jdbcType=VARCHAR}, #{like_count,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR},
+		#{timestamp,jdbcType=VARCHAR},
+		#{is_checked,jdbcType=TINYINT},
+		#{article_id,jdbcType=INTEGER},
+		#{useremail,jdbcType=VARCHAR}, #{web_likes,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="seience.havelook.pojo.Comment">
+		insert into comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="img_url != null">
+				img_url,
+			</if>
+			<if test="like_count != null">
+				like_count,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="timestamp != null">
+				timestamp,
+			</if>
+			<if test="is_checked != null">
+				is_checked,
+			</if>
+			<if test="article_id != null">
+				article_id,
+			</if>
+			<if test="useremail != null">
+				useremail,
+			</if>
+			<if test="web_likes != null">
+				web_likes,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="img_url != null">
+				#{img_url,jdbcType=VARCHAR},
+			</if>
+			<if test="like_count != null">
+				#{like_count,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=VARCHAR},
+			</if>
+			<if test="is_checked != null">
+				#{is_checked,jdbcType=TINYINT},
+			</if>
+			<if test="article_id != null">
+				#{article_id,jdbcType=INTEGER},
+			</if>
+			<if test="useremail != null">
+				#{useremail,jdbcType=VARCHAR},
+			</if>
+			<if test="web_likes != null">
+				#{web_likes,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="seience.havelook.pojo.Comment">
+		update comment
+		<set>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="img_url != null">
+				img_url = #{img_url,jdbcType=VARCHAR},
+			</if>
+			<if test="like_count != null">
+				like_count = #{like_count,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="timestamp != null">
+				timestamp = #{timestamp,jdbcType=VARCHAR},
+			</if>
+			<if test="is_checked != null">
+				is_checked = #{is_checked,jdbcType=TINYINT},
+			</if>
+			<if test="article_id != null">
+				article_id = #{article_id,jdbcType=INTEGER},
+			</if>
+			<if test="useremail != null">
+				useremail = #{useremail,jdbcType=VARCHAR},
+			</if>
+			<if test="web_likes != null">
+				web_likes = #{web_likes,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="seience.havelook.pojo.Comment">
+		update comment
+		set
+		pid = #{pid,jdbcType=INTEGER},
+		username = #{username,jdbcType=VARCHAR},
+		img_url = #{img_url,jdbcType=VARCHAR},
+		like_count =
+		#{like_count,jdbcType=INTEGER},
+		content = #{content,jdbcType=VARCHAR},
+		timestamp = #{timestamp,jdbcType=VARCHAR},
+		is_checked =
+		#{is_checked,jdbcType=TINYINT},
+		article_id =
+		#{article_id,jdbcType=INTEGER},
+		useremail =
+		#{useremail,jdbcType=VARCHAR},
+		web_likes =
+		#{web_likes,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

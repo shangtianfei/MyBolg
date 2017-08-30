@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seience.havelook.dao.FriendLinksMapper">
+	<resultMap id="BaseResultMap" type="seience.havelook.pojo.FriendLinks">
+		<id column="id" jdbcType="SMALLINT" property="id" />
+		<result column="web_name" jdbcType="VARCHAR" property="web_name" />
+		<result column="web_url" jdbcType="VARCHAR" property="web_url" />
+		<result column="sort_num" jdbcType="SMALLINT" property="sort_num" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, web_name, web_url, sort_num
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Short"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from friend_links
+		where id = #{id,jdbcType=SMALLINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+		delete from friend_links
+		where id = #{id,jdbcType=SMALLINT}
+	</delete>
+	<insert id="insert" parameterType="seience.havelook.pojo.FriendLinks">
+		insert into friend_links (id, web_name, web_url,
+		sort_num)
+		values (#{id,jdbcType=SMALLINT}, #{web_name,jdbcType=VARCHAR},
+		#{web_url,jdbcType=VARCHAR},
+		#{sort_num,jdbcType=SMALLINT})
+	</insert>
+	<insert id="insertSelective" parameterType="seience.havelook.pojo.FriendLinks">
+		insert into friend_links
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="web_name != null">
+				web_name,
+			</if>
+			<if test="web_url != null">
+				web_url,
+			</if>
+			<if test="sort_num != null">
+				sort_num,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=SMALLINT},
+			</if>
+			<if test="web_name != null">
+				#{web_name,jdbcType=VARCHAR},
+			</if>
+			<if test="web_url != null">
+				#{web_url,jdbcType=VARCHAR},
+			</if>
+			<if test="sort_num != null">
+				#{sort_num,jdbcType=SMALLINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="seience.havelook.pojo.FriendLinks">
+		update friend_links
+		<set>
+			<if test="web_name != null">
+				web_name = #{web_name,jdbcType=VARCHAR},
+			</if>
+			<if test="web_url != null">
+				web_url = #{web_url,jdbcType=VARCHAR},
+			</if>
+			<if test="sort_num != null">
+				sort_num = #{sort_num,jdbcType=SMALLINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=SMALLINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="seience.havelook.pojo.FriendLinks">
+		update friend_links
+		set web_name = #{web_name,jdbcType=VARCHAR},
+		web_url = #{web_url,jdbcType=VARCHAR},
+		sort_num = #{sort_num,jdbcType=SMALLINT}
+		where id = #{id,jdbcType=SMALLINT}
+	</update>
+</mapper>

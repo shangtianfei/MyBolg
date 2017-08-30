@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seience.havelook.dao.UserinfoMapper">
+	<resultMap id="BaseResultMap" type="seience.havelook.pojo.Userinfo">
+		<id column="user_id" jdbcType="INTEGER" property="user_id" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="password" jdbcType="CHAR" property="password" />
+		<result column="user_email" jdbcType="VARCHAR" property="user_email" />
+		<result column="timestamp" jdbcType="VARCHAR" property="timestamp" />
+		<result column="userlastip" jdbcType="VARCHAR" property="userlastip" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		user_id, username, password, user_email, timestamp, userlastip
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from userinfo
+		where user_id = #{user_id,jdbcType=INTEGER}
+	</select>
+	<!-- selectByUsername -->
+	<select id="selectByUsername" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from userinfo
+		where username = #{username,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from userinfo
+		where user_id = #{user_id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="seience.havelook.pojo.Userinfo">
+		insert into userinfo (user_id, username, password,
+		user_email, timestamp, userlastip
+		)
+		values (#{user_id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
+		#{password,jdbcType=CHAR},
+		#{user_email,jdbcType=VARCHAR}, #{timestamp,jdbcType=VARCHAR}, #{userlastip,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="seience.havelook.pojo.Userinfo">
+		insert into userinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="user_id != null">
+				user_id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="user_email != null">
+				user_email,
+			</if>
+			<if test="timestamp != null">
+				timestamp,
+			</if>
+			<if test="userlastip != null">
+				userlastip,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="user_id != null">
+				#{user_id,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=CHAR},
+			</if>
+			<if test="user_email != null">
+				#{user_email,jdbcType=VARCHAR},
+			</if>
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=VARCHAR},
+			</if>
+			<if test="userlastip != null">
+				#{userlastip,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="seience.havelook.pojo.Userinfo">
+		update userinfo
+		<set>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=CHAR},
+			</if>
+			<if test="user_email != null">
+				user_email = #{user_email,jdbcType=VARCHAR},
+			</if>
+			<if test="timestamp != null">
+				timestamp = #{timestamp,jdbcType=VARCHAR},
+			</if>
+			<if test="userlastip != null">
+				userlastip = #{userlastip,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where user_id = #{user_id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="seience.havelook.pojo.Userinfo">
+		update userinfo
+		set username = #{username,jdbcType=VARCHAR},
+		password = #{password,jdbcType=CHAR},
+		user_email = #{user_email,jdbcType=VARCHAR},
+		timestamp = #{timestamp,jdbcType=VARCHAR},
+		userlastip = #{userlastip,jdbcType=VARCHAR}
+		where user_id = #{user_id,jdbcType=INTEGER}
+	</update>
+</mapper>
