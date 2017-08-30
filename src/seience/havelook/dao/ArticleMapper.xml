@@ -1,438 +1,384 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="seience.havelook.dao.ArticleMapper">
-  <resultMap id="BaseResultMap" type="seience.havelook.pojo.Article">
-    <id column="article_id" jdbcType="INTEGER" property="articleId" />
-    <result column="article_name" jdbcType="VARCHAR" property="articleName" />
-    <result column="article_author" jdbcType="VARCHAR" property="articleAuthor" />
-    <result column="publish_time" jdbcType="VARCHAR" property="publishTime" />
-    <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
-    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
-    <result column="article_keyword" jdbcType="VARCHAR" property="articleKeyword" />
-    <result column="article_img" jdbcType="VARCHAR" property="articleImg" />
-    <result column="article_thumb" jdbcType="VARCHAR" property="articleThumb" />
-    <result column="is_top" jdbcType="INTEGER" property="isTop" />
-    <result column="article_view" jdbcType="INTEGER" property="articleView" />
-    <result column="article_love" jdbcType="INTEGER" property="articleLove" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="seience.havelook.pojo.ArticleWithBLOBs">
-    <result column="article_desc" jdbcType="LONGVARCHAR" property="articleDesc" />
-    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
-  </resultMap>
-    <resultMap type="seience.havelook.pojo.Article" id="ArticleWithCategoryMap">
-	    <id column="article_id" jdbcType="INTEGER" property="articleId" />
-	    <result column="article_name" jdbcType="VARCHAR" property="articleName" />
-	    <result column="article_author" jdbcType="VARCHAR" property="articleAuthor" />
-	    <result column="publish_time" jdbcType="DATE" property="publishTime" />
-	    <result column="modify_time" jdbcType="INTEGER" property="modifyTime" />
-	    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
-	    <result column="is_top" jdbcType="INTEGER" property="isTop" />
-	    <result column="article_view" jdbcType="INTEGER" property="articleView" />
-	    <result column="article_love" jdbcType="INTEGER" property="articleLove" />
-	    <!-- 一对一 -->
- 		<association property="category" javaType="seience.havelook.pojo.Category">
- 		    <id column="category_id"  property="categoryId" />
-            <result column="category_name"  property="categoryName" />
- 		</association>
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    article_id, article_name, article_author, publish_time, modify_time, category_id, 
-    article_keyword, article_img, article_thumb, is_top, article_view, article_love
-  </sql>
-  <sql id="Blob_Column_List">
-    article_desc, article_content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="seience.havelook.pojo.ArticleExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="seience.havelook.pojo.ArticleExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-   <select id="selectByExampleWithCategory"  resultMap="ArticleWithCategoryMap">
-    SELECT 
-		a.article_id, 
-		a.article_name, 
-		a.article_author,  
+	<resultMap id="BaseResultMap" type="seience.havelook.pojo.Article">
+		<id column="article_id" jdbcType="INTEGER" property="article_id" />
+		<result column="article_name" jdbcType="VARCHAR" property="article_name" />
+		<result column="user_id" jdbcType="INTEGER" property="user_id" />
+		<result column="publish_time" jdbcType="VARCHAR" property="publish_time" />
+		<result column="modify_time" jdbcType="VARCHAR" property="modify_time" />
+		<result column="category_id" jdbcType="INTEGER" property="category_id" />
+		<result column="article_keyword" jdbcType="VARCHAR" property="article_keyword" />
+		<result column="article_img" jdbcType="VARCHAR" property="article_img" />
+		<result column="article_thumb" jdbcType="VARCHAR" property="article_thumb" />
+		<result column="is_top" jdbcType="INTEGER" property="is_top" />
+		<result column="article_view" jdbcType="INTEGER" property="article_view" />
+		<result column="article_love" jdbcType="INTEGER" property="article_love" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="seience.havelook.pojo.ArticleWithBLOBs">
+		<result column="article_desc" jdbcType="LONGVARCHAR" property="article_desc" />
+		<result column="article_content" jdbcType="LONGVARCHAR"
+			property="article_content" />
+	</resultMap>
+	<resultMap type="seience.havelook.pojo.Article" id="ArticleWithCategoryAndUserinfoMap">
+		<id column="article_id" jdbcType="INTEGER" property="article_id" />
+		<result column="article_name" jdbcType="VARCHAR" property="article_name" />
+		<result column="user_id" jdbcType="INTEGER" property="user_id" />
+		<result column="publish_time" jdbcType="VARCHAR" property="publish_time" />
+		<result column="modify_time" jdbcType="VARCHAR" property="modify_time" />
+		<result column="category_id" jdbcType="INTEGER" property="category_id" />
+		<result column="article_keyword" jdbcType="VARCHAR" property="article_keyword" />
+		<result column="article_img" jdbcType="VARCHAR" property="article_img" />
+		<result column="article_thumb" jdbcType="VARCHAR" property="article_thumb" />
+		<result column="is_top" jdbcType="INTEGER" property="is_top" />
+		<result column="article_view" jdbcType="INTEGER" property="article_view" />
+		<result column="article_love" jdbcType="INTEGER" property="article_love" />
+		<!-- 一对一 -->
+		<association property="category" javaType="seience.havelook.pojo.Category">
+			<id column="category_id" property="category_id" />
+			<result column="category_name" property="category_name" />
+		</association>
+
+		<association property="userinfo" javaType="seience.havelook.pojo.Userinfo">
+			<id column="user_id" jdbcType="INTEGER" property="user_id" />
+			<result column="username" jdbcType="VARCHAR" property="username" />
+			<result column="password" jdbcType="CHAR" property="password" />
+			<result column="user_email" jdbcType="VARCHAR" property="user_email" />
+			<result column="timestamp" jdbcType="VARCHAR" property="timestamp" />
+			<result column="userlastip" jdbcType="VARCHAR" property="userlastip" />
+		</association>
+
+	</resultMap>
+
+	<resultMap extends="ArticleWithCategoryAndUserinfoMap"
+		id="ArticleWithCategoryAndUserinfoAndBLOBsMap" type="seience.havelook.pojo.ArticleWithBLOBs">
+		<result column="article_desc" jdbcType="LONGVARCHAR" property="article_desc" />
+		<result column="article_content" jdbcType="LONGVARCHAR"
+			property="article_content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		article_id, article_name, user_id, publish_time,
+		modify_time, category_id,
+		article_keyword,
+		article_img, article_thumb,
+		is_top, article_view, article_love
+	</sql>
+	<sql id="Blob_Column_List">
+		article_desc, article_content
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ArticleWithCategoryAndUserinfoAndBLOBsMap">
+		select
+		a.user_id,
+		a.article_id,
+		a.article_name,
+		a.article_content,
+		c.category_id,
+		c.category_name
+		FROM article a LEFT
+		JOIN category c ON
+		a.category_id = c.category_id
+		WHERE a.article_id =
+		#{article_id,jdbcType=INTEGER}
+	</select>
+	<!-- ArticleWithBLOBs selectByPrimaryKeyWithCategoryAndUserinfo(Integer 
+		article_id); -->
+	<select id="selectByPrimaryKeyWithCategoryAndUserinfo"
+		parameterType="java.lang.Integer" resultMap="ArticleWithCategoryAndUserinfoAndBLOBsMap">
+		select
+		a.article_thumb,
+		a.article_id,
+		a.article_name,
+		a.publish_time,
+		a.modify_time,
+		a.article_view,
+		a.article_love,
+		a.article_content,
+		u.username,
+		c.category_id,
+		c.category_name
+		FROM article a LEFT JOIN category c ON
+		a.category_id = c.category_id
+		LEFT JOIN userinfo u ON a.user_id =
+		u.user_id
+		WHERE a.article_id = #{article_id,jdbcType=INTEGER}
+	</select>
+	<select id="selectByExampleWithCategoryAndUserinfo" resultMap="ArticleWithCategoryAndUserinfoMap">
+		SELECT
+		a.article_thumb,
+		a.article_id,
+		a.article_name,
+		u.username,
 		c.category_id,
 		c.category_name,
 		a.publish_time,
 		a.modify_time,
 		a.article_view,
 		a.article_love
-    FROM article a LEFT JOIN category c ON a.category_id = c.category_id
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from article
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="seience.havelook.pojo.ArticleExample">
-    delete from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
-    insert into article (article_id, article_name, article_author, 
-      publish_time, modify_time, category_id, 
-      article_keyword, article_img, article_thumb, 
-      is_top, article_view, article_love, 
-      article_desc, article_content)
-    values (#{articleId,jdbcType=INTEGER}, #{articleName,jdbcType=VARCHAR}, #{articleAuthor,jdbcType=VARCHAR}, 
-      #{publishTime,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
-      #{articleKeyword,jdbcType=VARCHAR}, #{articleImg,jdbcType=VARCHAR}, #{articleThumb,jdbcType=VARCHAR}, 
-      #{isTop,jdbcType=INTEGER}, #{articleView,jdbcType=INTEGER}, #{articleLove,jdbcType=INTEGER}, 
-      #{articleDesc,jdbcType=LONGVARCHAR}, #{articleContent,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
-    insert into article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId == null">
-        article_id,
-      </if>
-      <if test="articleName != null">
-        article_name,
-      </if>
-      <if test="articleAuthor != null">
-        article_author,
-      </if>
-      <if test="publishTime != null">
-        publish_time,
-      </if>
-      <if test="modifyTime != null">
-        modify_time,
-      </if>
-      <if test="categoryId != null">
-        category_id,
-      </if>
-      <if test="articleKeyword != null">
-        article_keyword,
-      </if>
-      <if test="articleImg != null">
-        article_img,
-      </if>
-      <if test="articleThumb != null">
-        article_thumb,
-      </if>
-      <if test="isTop != null">
-        is_top,
-      </if>
-      <if test="articleView != null">
-        article_view,
-      </if>
-      <if test="articleLove != null">
-        article_love,
-      </if>
-      <if test="articleDesc != null">
-        article_desc,
-      </if>
-      <if test="articleContent != null">
-        article_content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId == null">
-      null,
-      </if>
-      <if test="articleName != null">
-        #{articleName,jdbcType=VARCHAR},
-      </if>
-      <if test="articleAuthor != null">
-        #{articleAuthor,jdbcType=VARCHAR},
-      </if>
-      <if test="publishTime != null">
-        #{publishTime,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyTime != null">
-        #{modifyTime,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryId != null">
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="articleKeyword != null">
-        #{articleKeyword,jdbcType=VARCHAR},
-      </if>
-      <if test="articleImg != null">
-        #{articleImg,jdbcType=VARCHAR},
-      </if>
-      <if test="articleThumb != null">
-        #{articleThumb,jdbcType=VARCHAR},
-      </if>
-      <if test="isTop != null">
-        #{isTop,jdbcType=INTEGER},
-      </if>
-      <if test="articleView != null">
-        #{articleView,jdbcType=INTEGER},
-      </if>
-      <if test="articleLove != null">
-        #{articleLove,jdbcType=INTEGER},
-      </if>
-      <if test="articleDesc != null">
-        #{articleDesc,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="articleContent != null">
-        #{articleContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="seience.havelook.pojo.ArticleExample" resultType="java.lang.Long">
-    select count(*) from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update article
-    <set>
-      <if test="record.articleId != null">
-        article_id = #{record.articleId,jdbcType=INTEGER},
-      </if>
-      <if test="record.articleName != null">
-        article_name = #{record.articleName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.articleAuthor != null">
-        article_author = #{record.articleAuthor,jdbcType=VARCHAR},
-      </if>
-      <if test="record.publishTime != null">
-        publish_time = #{record.publishTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.modifyTime != null">
-        modify_time = #{record.modifyTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.categoryId != null">
-        category_id = #{record.categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="record.articleKeyword != null">
-        article_keyword = #{record.articleKeyword,jdbcType=VARCHAR},
-      </if>
-      <if test="record.articleImg != null">
-        article_img = #{record.articleImg,jdbcType=VARCHAR},
-      </if>
-      <if test="record.articleThumb != null">
-        article_thumb = #{record.articleThumb,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isTop != null">
-        is_top = #{record.isTop,jdbcType=INTEGER},
-      </if>
-      <if test="record.articleView != null">
-        article_view = #{record.articleView,jdbcType=INTEGER},
-      </if>
-      <if test="record.articleLove != null">
-        article_love = #{record.articleLove,jdbcType=INTEGER},
-      </if>
-      <if test="record.articleDesc != null">
-        article_desc = #{record.articleDesc,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.articleContent != null">
-        article_content = #{record.articleContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update article
-    set article_id = #{record.articleId,jdbcType=INTEGER},
-      article_name = #{record.articleName,jdbcType=VARCHAR},
-      article_author = #{record.articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{record.publishTime,jdbcType=VARCHAR},
-      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
-      category_id = #{record.categoryId,jdbcType=INTEGER},
-      article_keyword = #{record.articleKeyword,jdbcType=VARCHAR},
-      article_img = #{record.articleImg,jdbcType=VARCHAR},
-      article_thumb = #{record.articleThumb,jdbcType=VARCHAR},
-      is_top = #{record.isTop,jdbcType=INTEGER},
-      article_view = #{record.articleView,jdbcType=INTEGER},
-      article_love = #{record.articleLove,jdbcType=INTEGER},
-      article_desc = #{record.articleDesc,jdbcType=LONGVARCHAR},
-      article_content = #{record.articleContent,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update article
-    set article_id = #{record.articleId,jdbcType=INTEGER},
-      article_name = #{record.articleName,jdbcType=VARCHAR},
-      article_author = #{record.articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{record.publishTime,jdbcType=VARCHAR},
-      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
-      category_id = #{record.categoryId,jdbcType=INTEGER},
-      article_keyword = #{record.articleKeyword,jdbcType=VARCHAR},
-      article_img = #{record.articleImg,jdbcType=VARCHAR},
-      article_thumb = #{record.articleThumb,jdbcType=VARCHAR},
-      is_top = #{record.isTop,jdbcType=INTEGER},
-      article_view = #{record.articleView,jdbcType=INTEGER},
-      article_love = #{record.articleLove,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
-    update article
-    <set>
-      <if test="articleName != null">
-        article_name = #{articleName,jdbcType=VARCHAR},
-      </if>
-      <if test="articleAuthor != null">
-        article_author = #{articleAuthor,jdbcType=VARCHAR},
-      </if>
-      <if test="publishTime != null">
-        publish_time = #{publishTime,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyTime != null">
-        modify_time = #{modifyTime,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="articleKeyword != null">
-        article_keyword = #{articleKeyword,jdbcType=VARCHAR},
-      </if>
-      <if test="articleImg != null">
-        article_img = #{articleImg,jdbcType=VARCHAR},
-      </if>
-      <if test="articleThumb != null">
-        article_thumb = #{articleThumb,jdbcType=VARCHAR},
-      </if>
-      <if test="isTop != null">
-        is_top = #{isTop,jdbcType=INTEGER},
-      </if>
-      <if test="articleView != null">
-        article_view = #{articleView,jdbcType=INTEGER},
-      </if>
-      <if test="articleLove != null">
-        article_love = #{articleLove,jdbcType=INTEGER},
-      </if>
-      <if test="articleDesc != null">
-        article_desc = #{articleDesc,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="articleContent != null">
-        article_content = #{articleContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
-    update article
-    set article_name = #{articleName,jdbcType=VARCHAR},
-      article_author = #{articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{publishTime,jdbcType=VARCHAR},
-      modify_time = #{modifyTime,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      article_keyword = #{articleKeyword,jdbcType=VARCHAR},
-      article_img = #{articleImg,jdbcType=VARCHAR},
-      article_thumb = #{articleThumb,jdbcType=VARCHAR},
-      is_top = #{isTop,jdbcType=INTEGER},
-      article_view = #{articleView,jdbcType=INTEGER},
-      article_love = #{articleLove,jdbcType=INTEGER},
-      article_desc = #{articleDesc,jdbcType=LONGVARCHAR},
-      article_content = #{articleContent,jdbcType=LONGVARCHAR}
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="seience.havelook.pojo.Article">
-    update article
-    set article_name = #{articleName,jdbcType=VARCHAR},
-      article_author = #{articleAuthor,jdbcType=VARCHAR},
-      publish_time = #{publishTime,jdbcType=VARCHAR},
-      modify_time = #{modifyTime,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      article_keyword = #{articleKeyword,jdbcType=VARCHAR},
-      article_img = #{articleImg,jdbcType=VARCHAR},
-      article_thumb = #{articleThumb,jdbcType=VARCHAR},
-      is_top = #{isTop,jdbcType=INTEGER},
-      article_view = #{articleView,jdbcType=INTEGER},
-      article_love = #{articleLove,jdbcType=INTEGER}
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </update>
+		FROM article a LEFT JOIN category c ON
+		a.category_id = c.category_id
+		LEFT JOIN userinfo u ON a.user_id =
+		u.user_id
+		ORDER BY a.article_id DESC
+	</select>
+	<!-- List<Article> selectByExampleWithCategoryAndUserinfoByCategoryId(Integer 
+		category_id); -->
+	<select id="selectByExampleWithCategoryAndUserinfoByCategoryId"
+		resultMap="ArticleWithCategoryAndUserinfoMap">
+		SELECT
+		a.article_thumb,
+		a.article_id,
+		a.article_name,
+		u.username,
+		c.category_id,
+		c.category_name,
+		a.publish_time,
+		a.modify_time,
+		a.article_view,
+		a.article_love
+		FROM article a LEFT JOIN
+		category c ON
+		a.category_id = c.category_id
+		LEFT JOIN userinfo u ON
+		a.user_id =
+		u.user_id
+		WHERE a.category_id =
+		#{category_id,jdbcType=INTEGER}
+	</select>
+	<!-- List<Article> selectRecentNewsOrderByDescWithLimit(Integer articleLimit); -->
+	<select id="selectRecentNewsOrderByDescWithLimit" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		SELECT
+		a.article_id,
+		a.article_name,
+		a.publish_time
+		FROM article a ORDER BY a.article_id DESC LIMIT
+		#{articleLimit,jdbcType=INTEGER}
+	</select>
+
+	<!-- int deleteByCategory_id(Integer category_id); -->
+	<delete id="deleteByCategory_id" parameterType="java.lang.Integer">
+		delete from
+		article
+		where category_id = #{category_id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		article
+		where article_id = #{article_id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
+		insert into article
+		(article_id, article_name, user_id,
+		publish_time, modify_time,
+		category_id,
+		article_keyword, article_img, article_thumb,
+		is_top,
+		article_view, article_love,
+		article_desc, article_content)
+		values
+		(#{article_id,jdbcType=INTEGER}, #{article_name,jdbcType=VARCHAR},
+		#{user_id,jdbcType=INTEGER},
+		#{publish_time,jdbcType=VARCHAR},
+		#{modify_time,jdbcType=VARCHAR}, #{category_id,jdbcType=INTEGER},
+		#{article_keyword,jdbcType=VARCHAR}, #{article_img,jdbcType=VARCHAR},
+		#{article_thumb,jdbcType=VARCHAR},
+		#{is_top,jdbcType=INTEGER},
+		#{article_view,jdbcType=INTEGER}, #{article_love,jdbcType=INTEGER},
+		#{article_desc,jdbcType=LONGVARCHAR},
+		#{article_content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
+		insert into article
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="article_id != null">
+				article_id,
+			</if>
+			<if test="article_name != null">
+				article_name,
+			</if>
+			<if test="user_id != null">
+				user_id,
+			</if>
+			<if test="publish_time != null">
+				publish_time,
+			</if>
+			<if test="modify_time != null">
+				modify_time,
+			</if>
+			<if test="category_id != null">
+				category_id,
+			</if>
+			<if test="article_keyword != null">
+				article_keyword,
+			</if>
+			<if test="article_img != null">
+				article_img,
+			</if>
+			<if test="article_thumb != null">
+				article_thumb,
+			</if>
+			<if test="is_top != null">
+				is_top,
+			</if>
+			<if test="article_view != null">
+				article_view,
+			</if>
+			<if test="article_love != null">
+				article_love,
+			</if>
+			<if test="article_desc != null">
+				article_desc,
+			</if>
+			<if test="article_content != null">
+				article_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="article_id != null">
+				#{article_id,jdbcType=INTEGER},
+			</if>
+			<if test="article_name != null">
+				#{article_name,jdbcType=VARCHAR},
+			</if>
+			<if test="user_id != null">
+				#{user_id,jdbcType=INTEGER},
+			</if>
+			<if test="publish_time != null">
+				#{publish_time,jdbcType=VARCHAR},
+			</if>
+			<if test="modify_time != null">
+				#{modify_time,jdbcType=VARCHAR},
+			</if>
+			<if test="category_id != null">
+				#{category_id,jdbcType=INTEGER},
+			</if>
+			<if test="article_keyword != null">
+				#{article_keyword,jdbcType=VARCHAR},
+			</if>
+			<if test="article_img != null">
+				#{article_img,jdbcType=VARCHAR},
+			</if>
+			<if test="article_thumb != null">
+				#{article_thumb,jdbcType=VARCHAR},
+			</if>
+			<if test="is_top != null">
+				#{is_top,jdbcType=INTEGER},
+			</if>
+			<if test="article_view != null">
+				#{article_view,jdbcType=INTEGER},
+			</if>
+			<if test="article_love != null">
+				#{article_love,jdbcType=INTEGER},
+			</if>
+			<if test="article_desc != null">
+				#{article_desc,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="article_content != null">
+				#{article_content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
+		update article
+		<set>
+			<if test="article_name != null">
+				article_name = #{article_name,jdbcType=VARCHAR},
+			</if>
+			<if test="user_id != null">
+				user_id = #{user_id,jdbcType=INTEGER},
+			</if>
+			<if test="publish_time != null">
+				publish_time = #{publish_time,jdbcType=VARCHAR},
+			</if>
+			<if test="modify_time != null">
+				modify_time = #{modify_time,jdbcType=VARCHAR},
+			</if>
+			<if test="category_id != null">
+				category_id = #{category_id,jdbcType=INTEGER},
+			</if>
+			<if test="article_keyword != null">
+				article_keyword = #{article_keyword,jdbcType=VARCHAR},
+			</if>
+			<if test="article_img != null">
+				article_img = #{article_img,jdbcType=VARCHAR},
+			</if>
+			<if test="article_thumb != null">
+				article_thumb = #{article_thumb,jdbcType=VARCHAR},
+			</if>
+			<if test="is_top != null">
+				is_top = #{is_top,jdbcType=INTEGER},
+			</if>
+			<if test="article_view != null">
+				article_view = #{article_view,jdbcType=INTEGER},
+			</if>
+			<if test="article_love != null">
+				article_love = #{article_love,jdbcType=INTEGER},
+			</if>
+			<if test="article_desc != null">
+				article_desc = #{article_desc,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="article_content != null">
+				article_content =
+				#{article_content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where article_id = #{article_id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="seience.havelook.pojo.ArticleWithBLOBs">
+		update
+		article
+		set article_name = #{article_name,jdbcType=VARCHAR},
+		user_id =
+		#{user_id,jdbcType=INTEGER},
+		publish_time =
+		#{publish_time,jdbcType=VARCHAR},
+		modify_time =
+		#{modify_time,jdbcType=VARCHAR},
+		category_id =
+		#{category_id,jdbcType=INTEGER},
+		article_keyword =
+		#{article_keyword,jdbcType=VARCHAR},
+		article_img =
+		#{article_img,jdbcType=VARCHAR},
+		article_thumb =
+		#{article_thumb,jdbcType=VARCHAR},
+		is_top = #{is_top,jdbcType=INTEGER},
+		article_view = #{article_view,jdbcType=INTEGER},
+		article_love =
+		#{article_love,jdbcType=INTEGER},
+		article_desc =
+		#{article_desc,jdbcType=LONGVARCHAR},
+		article_content =
+		#{article_content,jdbcType=LONGVARCHAR}
+		where article_id =
+		#{article_id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="seience.havelook.pojo.Article">
+		update article
+		set
+		article_name = #{article_name,jdbcType=VARCHAR},
+		user_id =
+		#{user_id,jdbcType=INTEGER},
+		publish_time =
+		#{publish_time,jdbcType=VARCHAR},
+		modify_time =
+		#{modify_time,jdbcType=VARCHAR},
+		category_id =
+		#{category_id,jdbcType=INTEGER},
+		article_keyword =
+		#{article_keyword,jdbcType=VARCHAR},
+		article_img =
+		#{article_img,jdbcType=VARCHAR},
+		article_thumb =
+		#{article_thumb,jdbcType=VARCHAR},
+		is_top = #{is_top,jdbcType=INTEGER},
+		article_view = #{article_view,jdbcType=INTEGER},
+		article_love =
+		#{article_love,jdbcType=INTEGER}
+		where article_id =
+		#{article_id,jdbcType=INTEGER}
+	</update>
 </mapper>

@@ -1,33 +1,34 @@
 package seience.havelook.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
+
 import seience.havelook.pojo.Article;
-import seience.havelook.pojo.ArticleExample;
 import seience.havelook.pojo.ArticleWithBLOBs;
 
 public interface ArticleMapper {
-    long countByExample(ArticleExample example);
-
-    int deleteByExample(ArticleExample example);
-
-    int deleteByPrimaryKey(Integer articleId);
+    int deleteByPrimaryKey(Integer article_id);
+    
+    int deleteByCategory_id(Integer category_id);
 
     int insert(ArticleWithBLOBs record);
 
     int insertSelective(ArticleWithBLOBs record);
 
-    List<ArticleWithBLOBs> selectByExampleWithBLOBs(ArticleExample example);
+    ArticleWithBLOBs selectByPrimaryKey(Integer article_id);
 
-    List<Article> selectByExample(ArticleExample example);
+	ArticleWithBLOBs selectByPrimaryKeyWithCategoryAndUserinfo(Integer article_id);
 
-    ArticleWithBLOBs selectByPrimaryKey(Integer articleId);
-
-    int updateByExampleSelective(@Param("record") ArticleWithBLOBs record, @Param("example") ArticleExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") ArticleWithBLOBs record, @Param("example") ArticleExample example);
-
-    int updateByExample(@Param("record") Article record, @Param("example") ArticleExample example);
+    List<Article> selectByExampleWithCategoryAndUserinfo();
+    
+    List<Article> selectRecentNewsOrderByDescWithLimit(Integer articleLimit);
+    
+    List<Article> selectByExampleWithCategoryAndUserinfoByCategoryId(Integer category_id);
+    
+    @Select("SELECT COUNT(a.article_id) FROM article a")
+	Integer getAllRowCount();
 
     int updateByPrimaryKeySelective(ArticleWithBLOBs record);
 
@@ -35,5 +36,4 @@ public interface ArticleMapper {
 
     int updateByPrimaryKey(Article record);
 
-	List<Article> selectByExampleWithCategory();
 }

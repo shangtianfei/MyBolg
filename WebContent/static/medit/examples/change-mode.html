@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="utf-8" />
-        <title>Chnage mode - Editor.md examples</title>
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="../css/editormd.css" />
-        <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-        <style>
-            #codes textarea {display: none;}
-        </style>
-    </head>
-    <body>
-        <div id="layout">
-            <header>
-                <h1>Chnage mode</h1>
-                <p>Become to the code editor</p>
-                <p>Modes : <select id="modes">
-                    <option value="">select modes</option>
-                </select>&nbsp;&nbsp;Themes : 
-                    <select id="themes">
-                        <option selected="selected" value="">select themes</option>
-                    </select>
-                </p>
-            </header>
-            <div class="btns">
-                <button id="get-code-btn">Get code source</button>
-                <button id="fullscreen-btn">Fullscreen (Press F11 into, ESC exit)</button>
-            </div>
-            <div id="codes">
-            <textarea id="html-code">&lt;!DOCTYPE html&gt;
+<head>
+<meta charset="utf-8" />
+<title>Chnage mode - Editor.md examples</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="../css/editormd.css" />
+<link rel="shortcut icon"
+	href="https://pandao.github.io/editor.md/favicon.ico"
+	type="image/x-icon" />
+<style>
+#codes textarea {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div id="layout">
+		<header>
+			<h1>Chnage mode</h1>
+			<p>Become to the code editor</p>
+			<p>
+				Modes : <select id="modes">
+					<option value="">select modes</option>
+				</select>&nbsp;&nbsp;Themes : <select id="themes">
+					<option selected="selected" value="">select themes</option>
+				</select>
+			</p>
+		</header>
+		<div class="btns">
+			<button id="get-code-btn">Get code source</button>
+			<button id="fullscreen-btn">Fullscreen (Press F11 into, ESC
+				exit)</button>
+		</div>
+		<div id="codes">
+			<textarea id="html-code">&lt;!DOCTYPE html&gt;
 &lt;html lang="zh"&gt;
     &lt;head&gt;
         &lt;meta charset="utf-8" /&gt;
@@ -67,7 +72,7 @@
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;</textarea>
-<textarea id="javascript-code">$(function() {
+			<textarea id="javascript-code">$(function() {
     var testEditor = editormd("test-editormd", {
         width            : "90%",
         height           : 720,
@@ -82,7 +87,7 @@
         path             : '../lib/'
     });
 });</textarea>
-<textarea id="xml-code">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+			<textarea id="xml-code">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;root&gt;
 	&lt;photo url="https://pandao.github.io/editor.md/examples/images/7.jpg"&gt;
 		&lt;title&gt;李健首张专辑《似水流年》封面&lt;/title&gt;
@@ -100,7 +105,7 @@
 		&lt;height&gt;360&lt;/height&gt;
 	&lt;/photo&gt;
 &lt;/root&gt;</textarea>
-<textarea id="ruby-code">#!/usr/bin/ruby
+			<textarea id="ruby-code">#!/usr/bin/ruby
 
 puts "Hello World!";
  
@@ -119,7 +124,7 @@ puts "I still need " +
      "to visit the " +
      "following cities:",
      cities - visited</textarea>
-<textarea id="json-code">{
+			<textarea id="json-code">{
     "employees": [
         {
             "firstName" : "Bill",
@@ -149,7 +154,7 @@ puts "I still need " +
         }
     ],
 }</textarea>
-<textarea id="php-code">&lt;?php
+			<textarea id="php-code">&lt;?php
     $app = new Phalcon\Mvc\Micro();
 
     //Set a route with the name "show-post"
@@ -210,7 +215,7 @@ puts "I still need " +
 
     $app->handle();
 ?&gt;</textarea>
-<textarea id="cpp-code">#include "dialog.h"
+			<textarea id="cpp-code">#include "dialog.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -221,7 +226,7 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }</textarea>
-<textarea id="java-code">package com.demo.blog;
+			<textarea id="java-code">package com.demo.blog;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
@@ -258,7 +263,7 @@ public class BlogController extends Controller {
 	}
 }
 </textarea>
-<textarea id="actionscript-code">package com.flite
+			<textarea id="actionscript-code">package com.flite
 {
 	import flash.net.*;
 	import flash.events.*;
@@ -327,13 +332,14 @@ public class BlogController extends Controller {
 		}
 	}
 
-}</textarea><textarea id="perl-code">#!/usr/bin/perl
+}</textarea>
+			<textarea id="perl-code">#!/usr/bin/perl
 use strict;
 use warnings;
 
 print "Hello, World...\n";
 </textarea>
-           <textarea id="go-code">package main
+			<textarea id="go-code">package main
 
 import (
     "github.com/astaxie/beego"
@@ -350,7 +356,8 @@ func (this *MainController) Get() {
 func main() {
     beego.Router("/", &MainController{})
     beego.Run()
-}</textarea><textarea id="python-code">#!/usr/bin/env python
+}</textarea>
+			<textarea id="python-code">#!/usr/bin/env python
 
 from flask import Flask
 app = Flask(__name__)
@@ -361,7 +368,7 @@ def hello_world():
 
 if __name__ == '__main__':
     app.run()</textarea>
-           <textarea id="css-code">    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,
+			<textarea id="css-code">    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,
     th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
         margin:0;padding:0;
     }
@@ -413,14 +420,15 @@ if __name__ == '__main__':
 
     ul {
         list-style: none;
-    }</textarea></div>
-            <div id="test-editormd">
-                <textarea style="display:none;"></textarea>
-            </div>
-        </div>
-        <script src="js/jquery.min.js"></script>
-        <script src="../editormd.js"></script>
-        <script type="text/javascript">
+    }</textarea>
+		</div>
+		<div id="test-editormd">
+			<textarea style="display: none;"></textarea>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="../editormd.js"></script>
+	<script type="text/javascript">
             var testEditor;
             
             function getCodeValue() {
@@ -504,5 +512,5 @@ if __name__ == '__main__':
                 });  
             });
         </script>
-    </body>
+</body>
 </html>

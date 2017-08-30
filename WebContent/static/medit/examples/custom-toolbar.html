@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="utf-8" />
-        <title>自定义工具栏 - Editor.md examples</title>
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="../css/editormd.css" />
-        <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-    </head>
-    <body>
-        <div id="layout">
-            <header>
-                <h1>自定义工具栏</h1> 
-                <p>Custom toolbar (icons handler)</p>   
-            </header>
-            <div id="test-editormd">
-                <textarea style="display:none;">### Custom toolbar
+<head>
+<meta charset="utf-8" />
+<title>自定义工具栏 - Editor.md examples</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="../css/editormd.css" />
+<link rel="shortcut icon"
+	href="https://pandao.github.io/editor.md/favicon.ico"
+	type="image/x-icon" />
+</head>
+<body>
+	<div id="layout">
+		<header>
+			<h1>自定义工具栏</h1>
+			<p>Custom toolbar (icons handler)</p>
+		</header>
+		<div id="test-editormd">
+			<textarea style="display: none;">### Custom toolbar
 
 ```javascript
 $(function() {
@@ -91,14 +93,14 @@ $(function() {
 });
 ```
 </textarea>
-            </div>
-        </div>
-        
-        <script src="js/jquery.min.js"></script>
-        <script src="../editormd.js"></script> 
-        <!-- 多语言和自定义工具栏的整合测试 -->
-        <script src="../languages/en.js"></script>   
-        <script type="text/javascript">
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="../editormd.js"></script>
+	<!-- 多语言和自定义工具栏的整合测试 -->
+	<script src="../languages/en.js"></script>
+	<script type="text/javascript">
             $(function() {
                 var testEditor = editormd("test-editormd", {
                     width: "90%",
@@ -174,5 +176,5 @@ $(function() {
                 });
             });
         </script>
-    </body>
+</body>
 </html>

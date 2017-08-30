@@ -32,11 +32,10 @@
 				</bean>
 			</list>
 		</property>
-	</bean>   
+	</bean>
 
 	<!-- 扫描@Controler @Service -->
 	<context:component-scan base-package="seience.havelook" />
-
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
 
@@ -56,6 +55,19 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<!-- 使 Shiro 的注解起作用, Shiro 的注解标示在方法上. 例如 @RequiresRoles、@RequiresPermissions -->
+
+
+	<!-- 因为目前是在 Handler 的方法上添加注解, 所以以下的配置需要作用在 SpringMVC 的 IOC 容器中. 而不是其父容器中. -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" />
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
 </beans>
 
 

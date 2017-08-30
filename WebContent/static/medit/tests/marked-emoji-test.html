@@ -1,82 +1,130 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <title>Marked Emoji Test</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <link rel="stylesheet" href="../dist/css/editormd.min.css" />
-        <style>
-            body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,
-            article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
-                margin:0;
-                padding:0;
-            }
+<head>
+<title>Marked Emoji Test</title>
+<meta charset="UTF-8">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="../dist/css/editormd.min.css" />
+<style>
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code,
+	form, fieldset, legend, input, textarea, p, blockquote, th, td, hr,
+	button, article, aside, details, figcaption, figure, footer, header,
+	hgroup, menu, nav, section {
+	margin: 0;
+	padding: 0;
+}
 
-            article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {display: block;}
-            audio, canvas, video {display: inline-block;} 
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	menu, nav, section, summary {
+	display: block;
+}
 
-            body, button, input, select, textarea {font:12px/1.5 Tahoma, "Hiragino Sans GB", "Microsoft Yahei", Arial;}
-            body{font-size:12px;color:#666;background:#fff url(../images/) no-repeat left top;}
+audio, canvas, video {
+	display: inline-block;
+}
 
-            body{font-size:14px;color:#444;font-family:"微软雅黑",Arial;background:#fff;padding: 15px;}
+body, button, input, select, textarea {
+	font: 12px/1.5 Tahoma, "Hiragino Sans GB", "Microsoft Yahei", Arial;
+}
 
-            a{color:#444;text-decoration: none;}
-            a:hover{color:#065BC2;text-decoration: none;}
+body {
+	font-size: 12px;
+	color: #666;
+	background: #fff url(../images/) no-repeat left top;
+}
 
-            .clear{zoom:1;}
-            .clear:after{content:"";height:0;visibility:hidden;clear:both;display:block;}
+body {
+	font-size: 14px;
+	color: #444;
+	font-family: "微软雅黑", Arial;
+	background: #fff;
+	padding: 15px;
+}
 
-            img{border:none;vertical-align: middle;}
-            
-            ul, ol {margin-left: 18px;}
-            
-            table {
-                margin: 10px 0;
-                border-collapse: collapse;
-            }
-            
-            table th, table td {
-                padding: 5px 8px;
-                border: 1px solid #ddd;
-            }
-            
-            pre {
-                padding:8px;border-radius:3px;border:1px solid #ddd;background:#f6f6f6;margin: 15px 0;display: inline-block;
-            }
-            
-            pre code {
-                
-            }
-            
-            .editormd-logo,
-            .editormd-logo-4x {
-                font-family: editormd-logo;
-                speak: none;
-                font-style: normal;
-                font-weight: 400;
-                font-variant: normal;
-                text-transform: none;
-                font-size: inherit;
-                line-height: 1;
-                display: inline-block;
-                text-rendering: auto;
-                vertical-align: inherit;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-            .editormd-logo:before,
-            .editormd-logo-4x:before {
-                content: "\e1987";
-            }
-            .editormd-logo-4x {
-                font-size:4em;
-            }
-        </style>
-    </head>
-    <body>
-        <i class="editormd-logo editormd-logo-4x"></i><br/>
-        <pre id="md">&gt; Blockquotes
+a {
+	color: #444;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #065BC2;
+	text-decoration: none;
+}
+
+.clear {
+	zoom: 1;
+}
+
+.clear:after {
+	content: "";
+	height: 0;
+	visibility: hidden;
+	clear: both;
+	display: block;
+}
+
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+ul, ol {
+	margin-left: 18px;
+}
+
+table {
+	margin: 10px 0;
+	border-collapse: collapse;
+}
+
+table th, table td {
+	padding: 5px 8px;
+	border: 1px solid #ddd;
+}
+
+pre {
+	padding: 8px;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	background: #f6f6f6;
+	margin: 15px 0;
+	display: inline-block;
+}
+
+pre code {
+	
+}
+
+.editormd-logo, .editormd-logo-4x {
+	font-family: editormd-logo;
+	speak: none;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	font-size: inherit;
+	line-height: 1;
+	display: inline-block;
+	text-rendering: auto;
+	vertical-align: inherit;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.editormd-logo:before, .editormd-logo-4x:before {
+	content: "\e1987";
+}
+
+.editormd-logo-4x {
+	font-size: 4em;
+}
+</style>
+</head>
+<body>
+	<i class="editormd-logo editormd-logo-4x"></i>
+	<br />
+	<pre id="md">&gt; Blockquotes
 dasfsadfasdf:fa-edit: :warning: :smiley:dsafsdfsad\:fdsfdf\:f dfdf:   :fa-save::fa-star:  :fa-truck:
 **fdfasd:smiley:dsfsdfsfd** ~~fsdfds:smiley:dfsdfsdf :fa-info:~~
 *dsfdfsfd:smiley:dsfsfdsfd:smiley:dsfdf*
@@ -122,9 +170,9 @@ This is an H1 :editormd-logo-4x:
 This  :fa-save::  :fa-truck:is an H2 :100:
 -------------
 </pre>
-        <script src="../examples/js/jquery.min.js"></script>
-        <script src="../lib/marked.min.js"></script>
-        <script type="text/javascript">
+	<script src="../examples/js/jquery.min.js"></script>
+	<script src="../lib/marked.min.js"></script>
+	<script type="text/javascript">
             
             $(function() {
                 var markedRenderer     = new marked.Renderer();
@@ -227,5 +275,5 @@ This  :fa-save::  :fa-truck:is an H2 :100:
                 $("body").append(md);
             });
         </script>
-    </body>
+</body>
 </html>

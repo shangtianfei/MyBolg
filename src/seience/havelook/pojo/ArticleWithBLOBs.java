@@ -1,23 +1,23 @@
 package seience.havelook.pojo;
 
 public class ArticleWithBLOBs extends Article {
-    private String articleDesc;
+    private String article_desc;
 
-    private String articleContent;
+    private String article_content;
 
-    public String getArticleDesc() {
-        return articleDesc;
+    public String getArticle_desc() {
+        return article_desc;
     }
 
-    public void setArticleDesc(String articleDesc) {
-        this.articleDesc = articleDesc == null ? null : articleDesc.trim();
+    public void setArticle_desc(String article_desc) {
+        this.article_desc = article_desc == null ? null : article_desc.trim();
     }
 
-    public String getArticleContent() {
-        return articleContent;
+    public String getArticle_content() {
+        return article_content;
     }
 
-    public void setArticleContent(String articleContent) {
-        this.articleContent = articleContent == null ? null : articleContent.trim();
+    public void setArticle_content(String article_content) {
+        this.article_content = article_content == null ? null : article_content.trim();
     }
 }

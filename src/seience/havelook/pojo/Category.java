@@ -1,23 +1,23 @@
 package seience.havelook.pojo;
 
 public class Category {
-    private Integer categoryId;
+    private Integer category_id;
 
-    private String categoryName;
+    private String category_name;
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Integer getCategory_id() {
+        return category_id;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory_id(Integer category_id) {
+        this.category_id = category_id;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName == null ? null : categoryName.trim();
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name == null ? null : category_name.trim();
     }
 }

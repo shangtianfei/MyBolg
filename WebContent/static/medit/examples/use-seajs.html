@@ -1,56 +1,65 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="utf-8" />
-        <title>Using sea.js - Editor.md examples</title>
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="../css/editormd.min.css" /> 
-        <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-        <style>
-            header p code {
-                padding: 3px;
-                border: 1px solid #ddd;
-                background: #f6f6f6;
-                border-radius: 3px;
-                font-size: 85%;
-                font-family: Consolas, 'Monaco', courier, monospace;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="layout">
-            <header>
-                <h1>Using sea.js</h1>   
-                <p>说明：</p>
-                <p>1、由于Editor.md是依赖jQuery的，所以在使用Sea.js加载Editor.md时，要在jQuery.js文件尾部加上 <code>if(typeof define === "function") { define(function () { return $.noConflict(); }); }</code>，使jQuery支持Sea.js；</p>  
-                <p>2、flowChart（流程图）和sequenceDiagram（时序图）基于Raphael.js，由于疑似Sea.js与Raphael.js有冲突，所以必须先加载Raphael.js再加载Sea.js，Editor.md才能在Sea.js下正常进行；</p>      
-                <ul style="margin: 10px 0 0 18px;">
-                    <li>Enable HTML tags decode</li>
-                    <li>Enable TeX, Flowchart, Sequence Diagram, Emoji, FontAwesome, Task lists</li>
-                    <li>Enable Image upload</li>
-                    <li>Enable [TOCM], Search Replace, Code fold</li>
-                </ul>  
-            </header>
-            <div class="btns">
-                <button id="show-btn">Show editor</button>
-                <button id="hide-btn">Hide editor</button>
-                <button id="get-md-btn">Get Markdown</button>
-                <button id="get-html-btn">Get HTML</button>
-                <button id="watch-btn">Watch</button>
-                <button id="unwatch-btn">Unwatch</button>
-                <button id="preview-btn">Preview HTML (Press Shift + ESC cancel)</button>
-                <button id="fullscreen-btn">Fullscreen (Press ESC cancel)</button>
-                <button id="show-toolbar-btn">Show toolbar</button>
-                <button id="close-toolbar-btn">Hide toolbar</button>
-                <button id="toc-menu-btn">ToC Dropdown menu</button>
-                <button id="toc-default-btn">ToC default</button>
-            </div>
-            <div id="test-editormd"></div>
-        </div>   
-        <!-- Flowchart & Sequence Diagram based on Raphael.js, and must load Raphael.js of Sea.js before. -->
-        <script src="../lib/raphael.min.js"></script>
-        <script src="js/sea.js"></script>
-        <script type="text/javascript">
+<head>
+<meta charset="utf-8" />
+<title>Using sea.js - Editor.md examples</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="../css/editormd.min.css" />
+<link rel="shortcut icon"
+	href="https://pandao.github.io/editor.md/favicon.ico"
+	type="image/x-icon" />
+<style>
+header p code {
+	padding: 3px;
+	border: 1px solid #ddd;
+	background: #f6f6f6;
+	border-radius: 3px;
+	font-size: 85%;
+	font-family: Consolas, 'Monaco', courier, monospace;
+}
+</style>
+</head>
+<body>
+	<div id="layout">
+		<header>
+			<h1>Using sea.js</h1>
+			<p>说明：</p>
+			<p>
+				1、由于Editor.md是依赖jQuery的，所以在使用Sea.js加载Editor.md时，要在jQuery.js文件尾部加上
+				<code>if(typeof define === "function") { define(function () {
+					return $.noConflict(); }); }</code>
+				，使jQuery支持Sea.js；
+			</p>
+			<p>2、flowChart（流程图）和sequenceDiagram（时序图）基于Raphael.js，由于疑似Sea.js与Raphael.js有冲突，所以必须先加载Raphael.js再加载Sea.js，Editor.md才能在Sea.js下正常进行；</p>
+			<ul style="margin: 10px 0 0 18px;">
+				<li>Enable HTML tags decode</li>
+				<li>Enable TeX, Flowchart, Sequence Diagram, Emoji,
+					FontAwesome, Task lists</li>
+				<li>Enable Image upload</li>
+				<li>Enable [TOCM], Search Replace, Code fold</li>
+			</ul>
+		</header>
+		<div class="btns">
+			<button id="show-btn">Show editor</button>
+			<button id="hide-btn">Hide editor</button>
+			<button id="get-md-btn">Get Markdown</button>
+			<button id="get-html-btn">Get HTML</button>
+			<button id="watch-btn">Watch</button>
+			<button id="unwatch-btn">Unwatch</button>
+			<button id="preview-btn">Preview HTML (Press Shift + ESC
+				cancel)</button>
+			<button id="fullscreen-btn">Fullscreen (Press ESC cancel)</button>
+			<button id="show-toolbar-btn">Show toolbar</button>
+			<button id="close-toolbar-btn">Hide toolbar</button>
+			<button id="toc-menu-btn">ToC Dropdown menu</button>
+			<button id="toc-default-btn">ToC default</button>
+		</div>
+		<div id="test-editormd"></div>
+	</div>
+	<!-- Flowchart & Sequence Diagram based on Raphael.js, and must load Raphael.js of Sea.js before. -->
+	<script src="../lib/raphael.min.js"></script>
+	<script src="js/sea.js"></script>
+	<script type="text/javascript">
             seajs.config({
                 base  : "./",
                 alias : {
@@ -172,5 +181,5 @@
                 });
             });
         </script>
-    </body>
+</body>
 </html>

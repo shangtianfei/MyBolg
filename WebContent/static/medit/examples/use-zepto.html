@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="utf-8" />
-        <title>Using Zepto.js - Editor.md examples</title>
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="../css/editormd.css" />
-        <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-    </head>
-    <body>
-        <div id="layout">
-            <header>
-                <h1>Using Zepto.js</h1>
-                <ul style="margin: 10px 0 0 18px;">
-                    <li>Enable HTML tags decode</li>
-                    <li>Enable TeX, Flowchart, Sequence Diagram, Emoji, FontAwesome, Task lists</li>
-                    <li>Enable Image upload</li>
-                    <li>Enable [TOCM], Search Replace, Code fold</li>
-                </ul>  
-            </header>
-            <div class="btns">
-                <button id="show-btn">Show editor</button>
-                <button id="hide-btn">Hide editor</button>
-                <button id="get-md-btn">Get Markdown</button>
-                <button id="get-html-btn">Get HTML</button>
-                <button id="watch-btn">Watch</button>
-                <button id="unwatch-btn">Unwatch</button>
-                <button id="preview-btn">Preview HTML (Press Shift + ESC cancel)</button>
-                <button id="fullscreen-btn">Fullscreen (Press ESC cancel)</button>
-                <button id="show-toolbar-btn">Show toolbar</button>
-                <button id="close-toolbar-btn">Hide toolbar</button>
-                <button id="toc-menu-btn">ToC Dropdown menu</button>
-                <button id="toc-default-btn">ToC default</button>
-            </div>
-            <form action="http://editormd.ipandao.com/php/post.php" method="post">
-                <div class="editormd" id="test-editormd">                
-                    <textarea>### Hello world!</textarea>
-                </div>
-                <br/><input type="submit" name="submit" value="Submit" class="btn" style="margin-left: 5%;" />
-            </form>
-        </div>        
-        <script src="js/zepto.min.js"></script>
-        <script src="../editormd.js"></script>   
-        <script type="text/javascript">
+<head>
+<meta charset="utf-8" />
+<title>Using Zepto.js - Editor.md examples</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="../css/editormd.css" />
+<link rel="shortcut icon"
+	href="https://pandao.github.io/editor.md/favicon.ico"
+	type="image/x-icon" />
+</head>
+<body>
+	<div id="layout">
+		<header>
+			<h1>Using Zepto.js</h1>
+			<ul style="margin: 10px 0 0 18px;">
+				<li>Enable HTML tags decode</li>
+				<li>Enable TeX, Flowchart, Sequence Diagram, Emoji,
+					FontAwesome, Task lists</li>
+				<li>Enable Image upload</li>
+				<li>Enable [TOCM], Search Replace, Code fold</li>
+			</ul>
+		</header>
+		<div class="btns">
+			<button id="show-btn">Show editor</button>
+			<button id="hide-btn">Hide editor</button>
+			<button id="get-md-btn">Get Markdown</button>
+			<button id="get-html-btn">Get HTML</button>
+			<button id="watch-btn">Watch</button>
+			<button id="unwatch-btn">Unwatch</button>
+			<button id="preview-btn">Preview HTML (Press Shift + ESC
+				cancel)</button>
+			<button id="fullscreen-btn">Fullscreen (Press ESC cancel)</button>
+			<button id="show-toolbar-btn">Show toolbar</button>
+			<button id="close-toolbar-btn">Hide toolbar</button>
+			<button id="toc-menu-btn">ToC Dropdown menu</button>
+			<button id="toc-default-btn">ToC default</button>
+		</div>
+		<form action="http://editormd.ipandao.com/php/post.php" method="post">
+			<div class="editormd" id="test-editormd">
+				<textarea>### Hello world!</textarea>
+			</div>
+			<br />
+			<input type="submit" name="submit" value="Submit" class="btn"
+				style="margin-left: 5%;" />
+		</form>
+	</div>
+	<script src="js/zepto.min.js"></script>
+	<script src="../editormd.js"></script>
+	<script type="text/javascript">
 			var testEditor;
 			var jQuery = Zepto;  // 为了避免修改 flowChart.js 和 sequence-diagram.js 的源码，所以想支持 flowChart / sequenceDiagram 就得加上这一句
 
@@ -122,5 +128,5 @@
                 });
             });
         </script>
-    </body>
+</body>
 </html>

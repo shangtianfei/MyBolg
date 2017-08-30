@@ -16,34 +16,31 @@
 	href="<%=basePath%>static/medit/css/editormd.preview.css" />
 <link rel="stylesheet"
 	href="<%=basePath%>static/medit/examples/css/style.css" />
-<<<<<<< HEAD
-</head>
-<body>
-	<div align="center">
-		<div id="layout" style="width: 70%;">
-		    <jsp:include page="/WEB-INF/jsp/nav.jsp"></jsp:include>
-		    <h2>${articleWithBLOBs.articleName }</h2>
-=======
 <link href="<%=basePath%>static/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/jsp/nav.jsp" />
-	<div align="center">
-		<div id="layout" style="width: 55%;">
-            <div id="head-div" class="page-header">
-            <h1><b>${articleWithBLOBs.articleName }</b></h1>
-			        <span class="glyphicon glyphicon-user"> ${articleWithBLOBs.articleAuthor }</span>&nbsp;
-		            <span class="glyphicon glyphicon-tags"> ${articleWithBLOBs.categoryId }</span>&nbsp;
-		            <span class="glyphicon glyphicon-time"> ${articleWithBLOBs.publishTime }</span>&nbsp;
-		            <span class="glyphicon glyphicon-paperclip"> ${articleWithBLOBs.articleView }评论</span>
-			</div>
->>>>>>> 2017_8_6_2
-			<div id="test-editormd-view2">
-				<textarea id="append-test" style="display: none;">${articleWithBLOBs.articleContent }</textarea>
+	<%@ include file='/WEB-INF/jsp/publicJsp/nav.jsp'%>
+	<div class='container'>
+		<div class='row clearfix'>
+			<div class='col-md-12 column'>
+				<div class='row clearfix'>
+					<div class='col-md-1 column' align="left"></div>
+					<div class='col-md-8 column' id="articleListDiv" align="left">
+						<%@ include
+							file='/WEB-INF/jsp/publicJsp/independentViewCenter.jsp'%>
+						<%@ include
+							file='/WEB-INF/jsp/publicJsp/independentPageNextOrUp.jsp'%>
+						<%@ include file='/WEB-INF/jsp/publicJsp/independentMessage.jsp'%>
+					</div>
+					<div class='col-md-3 column' align="left">
+						<%@ include file='/WEB-INF/jsp/publicJsp/navRight.jsp'%>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+
 	<!-- <script src="js/zepto.min.js"></script>
 		<script>		
 			var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
@@ -59,15 +56,14 @@
 	<script src="<%=basePath%>static/medit/lib/jquery.flowchart.min.js"></script>
 
 	<script src="<%=basePath%>static/medit/editormd.js"></script>
+	<script src="<%=basePath%>static/js/bootstrap.min.js"></script>
+	<!-- layer.js的路径 -->
+	<script src="<%=basePath%>static/layer/layer.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			var testEditormdView, testEditormdView2;
 
-<<<<<<< HEAD
-			$.get("medie_md.jsp", function(markdown) {
-=======
 			$.get("<%=basePath%>medie_md.jsp", function(markdown) {
->>>>>>> 2017_8_6_2
 
 				testEditormdView = editormd.markdownToHTML(
 						"test-editormd-view", {
@@ -106,6 +102,55 @@
 					});
 		});
 	</script>
-</body>
+	<script type='text/javascript'>
+	function categoryShow(category_id,category_name){
+		  $.ajax({
+				type:'post',
+				url:'<%=basePath%>category/selectByCategoryId',
+				data : {
+					'category_id':category_id
+				},
+				dataType:'json',
+				success : function(data) {
+					 $('#articleListDiv').html('');//清除articleListDiv
+					var aList = data;
+					 if (aList.length == 0) {
+						 var articleNotFound = "<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>不存在的</h3></div><div class='panel-body'><h3>"+category_name+"</h3>类下没有文章</div></div>";
+						 $('#articleListDiv').append(articleNotFound);
+						 } 
+					 $('#articleListDiv').append("<div>类别:<b>"+aList[0].category.category_name+"</b>("+aList.length+")</div>");
+					 $.each(aList, function(index, articleList){
+                    var categoryForEach = "<div class='panel panel-default'><div class='panel-body'><h3><a href='<%=basePath%>selectByPrimaryKey/"
+														+ articleList.article_id
+														+ " ' title='"
+														+ articleList.article_name
+														+ "'>"
+														+ articleList.article_name
+														+ "</a><small><em ><span  class='label label-primary'>"+articleList.category.category_name+"</span></em></small></h3><p>"
+														+ articleList.article_thumb
+														+ "</p><p align='right'><span class='glyphicon glyphicon-user'>:<a  href='#' title='作者"+articleList.userinfo.username+"'>"
+														+ articleList.userinfo.username
+														+ "</a></span>&ensp;<span class='glyphicon glyphicon-thumbs-up'>:<a  href='#' title='为我点赞'>"
+														+ articleList.article_love
+														+ "</a></span>&ensp;<span class='glyphicon glyphicon-eye-open'>:<a  href='#' title='有"+articleList.article_view+"人阅读这篇文章'>"
+														+ articleList.article_view
+														+ "</a></span>&ensp;</p></div></div>";
+												$('#articleListDiv').append(
+														categoryForEach);
+											});
+						}
+					});
+		};
+		function commentSubmit() {
+			$.ajax({
+				type:"post",
+				url:"<%=basePath%>comment/commentSubmit",
+					data : $('#fromComment').serialize(),
+					success : function(data) {
+						layer.msg('恭喜你提交成功(ps:你的评论经管理员审核后就会显示在评论区哦)');
+					}
+				});
+			};
+		</script>
 </body>
 </html>

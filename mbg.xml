@@ -36,17 +36,25 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- 指定每个标的生成策略 -->
-		<!-- 指定每个标的生成策略 -->
-		<table tableName="article" domainObjectName="Article"></table>
-		<table tableName="category" domainObjectName="Category"></table>
-		<table schema="general" tableName="usermanager" domainObjectName="Usermanager" 
+		<!-- <table schema="general" tableName="userinfo" domainObjectName="Userinfo" 
 			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
-			enableSelectByExample="ture" selectByExampleQueryId="false" > <property name="useActualColumnNames" 
-			value="false"/> </table> 
-			<!--<table schema="general" tableName="article" domainObjectName="Article" 
+			enableSelectByExample="ture" selectByExampleQueryId="false"> <property name="useActualColumnNames" 
+			value="true" /> </table> -->
+		<!-- <table schema="general" tableName="article" domainObjectName="Article" 
 			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
-			enableSelectByExample="false" selectByExampleQueryId="false" > <property 
-			name="useActualColumnNames" value="false"/> </table> -->
-
+			enableSelectByExample="false" selectByExampleQueryId="false"> <property name="useActualColumnNames" 
+			value="true" /> </table> <table schema="general" tableName="category" domainObjectName="Category" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" selectByExampleQueryId="false"> <property name="useActualColumnNames" 
+			value="true" /> </table> <table schema="general" tableName="comment" domainObjectName="Comment" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="ture" selectByExampleQueryId="false"> <property name="useActualColumnNames" 
+			value="true" /> </table> -->
+		<table schema="general" tableName="friend_links"
+			domainObjectName="FriendLinks" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="ture" selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
 	</context>
 </generatorConfiguration>

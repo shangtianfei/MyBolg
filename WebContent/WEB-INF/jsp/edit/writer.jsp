@@ -32,42 +32,48 @@
 			<button id="show-toolbar-btn">显示工具栏</button>
 			<button id="close-toolbar-btn">隐藏工具栏</button>
 			<button id="open-help-dialog">使用帮助</button>
-		</div>	
-		<input type="hidden" id="article_id" value="${articleWithBLOBs.articleId }"/>
+		</div>
+		<input type="hidden" id="article_id"
+			value="${articleWithBLOBs.article_id }" /> <input type="hidden"
+			id="user_id" value="${articleWithBLOBs.user_id }" />
 		<div class="col-xs-8">
 			<input type="text" class="form-control" id="article_name"
-				placeholder="输入题目..." value="${articleWithBLOBs.articleName }">
+				placeholder="输入题目..." value="${articleWithBLOBs.article_name }">
 		</div>
 		<div class="col-sm-2">
-			<select class="form-control" id="category_id" >
-			   <div id="categoryList_div">
-				    <c:forEach items="${categoryList}" var="clist">
-						<option value="${clist.categoryId}">${clist.categoryName }</option>
+			<select class="form-control" id="category_id">
+				<option value="${articleWithBLOBs.category.category_id }"
+					selected="selected">${articleWithBLOBs.category.category_name }</option>
+				<div id="categoryList_div">
+					<c:forEach items="${categoryList}" var="clist">
+						<option value="${clist.category_id}">${clist.category_name }</option>
 					</c:forEach>
 				</div>
 			</select>
 		</div>
-			<!-- <button type="button" class="btn btn-default" id="addTag">添加分类</button> -->
-			<p class="popover-options">
-				<button id="addTagButton_button" class="btn btn-primary btn-xs" title="<h2>addTag</h2>"  
-				   data-container="body"  data-placement="top"  data-toggle="popover" data-content=" <input type='text' id='category_name'/><button type='button' onclick='addTagButton()'>添加</button>">
-					添加分类
-				</button>
-				<c:set var="salary" scope="session" value="${articleWithBLOBs.articleId }"/>
-				<c:if test="${salary > 0}">
-				   <button class="btn btn-primary" id="get-md-btn">发布更新</button>
-				</c:if>
-				<c:if test="${salary == null}">
-				   	<button type="button" class="btn btn-default" id="get-md-btn">发布</button>
-				</c:if>
-			</p>
+		<!-- <button type="button" class="btn btn-default" id="addTag">添加分类</button> -->
+		<p class="popover-options">
+			<button id="addTagButton_button" class="btn btn-primary btn-xs"
+				title="<h2>addTag</h2>" data-container="body" data-placement="top"
+				data-toggle="popover"
+				data-content=" <input type='text' id='category_name'/><button type='button' onclick='addTagButton()'>添加</button>">
+				添加分类</button>
+			<c:set var="salary" scope="session"
+				value="${articleWithBLOBs.article_id }" />
+			<c:if test="${salary > 0}">
+				<button class="btn btn-primary" id="get-md-btn">发布更新</button>
+			</c:if>
+			<c:if test="${salary == null}">
+				<button type="button" class="btn btn-default" id="get-md-btn">发布</button>
+			</c:if>
+		</p>
 		<div id="editormd">
-					 <textarea style="display: none;">${articleWithBLOBs.articleContent }</textarea>
+			<textarea style="display: none;">${articleWithBLOBs.article_content }</textarea>
 		</div>
 		<script src="<%=basePath%>static/medit/examples/js/jquery.min.js"></script>
 		<script src="<%=basePath%>static/medit/editormd.min.js"></script>
 		<script src="<%=basePath%>static/js/bootstrap.min.js"></script>
-		
+
 		<script type="text/javascript">
 			function addTagButton(){
 				$.ajax({
@@ -78,14 +84,10 @@
 					},
 					dataType:"json",
 					success : function(data) {
-						/* for(i=0;i<data.length;i++){
-							 var name=data[i].categoryName;
-							 alert("name:"+name+"\n");
-							  }*/
 						$("#category_id").empty();//清除select里面的数据
 						var categoryList = data;
 						$.each(categoryList, function(index, clist){
-							var selectForEach = "<option value="+clist.categoryId+">"+clist.categoryName+"</option>";
+							var selectForEach = "<option value="+clist.category_id+">"+clist.category_name+"</option>";
 							$("#category_id").append(selectForEach);
 						});
 						$('#addTagButton_button').popover('hide')
@@ -103,7 +105,7 @@
                         path:"<%=basePath%>static/medit/lib/",
                     imageUpload : true,
                     imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                    imageUploadURL : "./php/upload.php?test=dfdf",/* 图片上传路径 */
+                    imageUploadURL : "<%=basePath%>updatePic",/* 图片上传路径 */
 					appendMarkdown : "\n" + md,
 					saveHTMLToTextarea : true,
 					watch : false,
@@ -163,14 +165,15 @@
 													"article_content" : testEditor.getMarkdown(),
 													"article_name" : $("#article_name").val(),
 													"category_id" : $("#category_id").val(),
-													"article_id":$("#article_id").val()
+													"article_id":$("#article_id").val(),
+													"user_id":$("#user_id").val()
 												},
 												success : function(data) {
-													window.location.href = 'http://localhost:8080/mybolg/admin';
-												}
-											});
+													window.location.href = '<%=basePath%>admin';
+						}
+					});
 
-								});
+				});
 
 				$("#watch-btn").click(function() {
 					testEditor.watch();
@@ -199,9 +202,13 @@
 				$("#open-help-dialog").bind('click', function() {
 					$.proxy(testEditor.toolbarHandlers.help, testEditor)();
 				});
-				
-				$(function () { $(".popover-options button").popover({html : true });});
-				
+
+				$(function() {
+					$(".popover-options button").popover({
+						html : true
+					});
+				});
+
 			});
 		</script>
 

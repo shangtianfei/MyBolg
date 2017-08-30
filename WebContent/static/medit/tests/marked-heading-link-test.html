@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <title>Marked heading link Test</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <link rel="stylesheet" href="../examples/css/style.css" />
-    </head>
-    <body>
-        <script src="../examples/js/jquery.min.js"></script>
-        <script src="../lib/marked.min.js"></script>
-        <script type="text/javascript">
+<head>
+<title>Marked heading link Test</title>
+<meta charset="UTF-8">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="../examples/css/style.css" />
+</head>
+<body>
+	<script src="../examples/js/jquery.min.js"></script>
+	<script src="../lib/marked.min.js"></script>
+	<script type="text/javascript">
                 
             var linkReg = /\s*\<a\s*href\=\"(.*)\"\s*([^\>]*)\>(.*)\<\/a\>\s*/;
             var linkTextReg = /\s*\<a\s*([^\>]+)\>([^\>]*)\<\/a\>\s*/g;
@@ -134,5 +134,5 @@
                 $("body").append(md).append(md2).append(md3).append(md4);
             });
         </script>
-    </body>
+</body>
 </html>

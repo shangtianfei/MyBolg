@@ -1,31 +1,34 @@
 package seience.havelook.pojo;
 
 public class Article {
-    private Integer articleId;
+    private Integer article_id;
 
-    private String articleName;
+    private String article_name;
 
-    private String articleAuthor;
+    private Integer user_id;
 
-    private String publishTime;
+    private String publish_time;
 
-    private String modifyTime;
+    private String modify_time;
 
-    private Integer categoryId;
+    private Integer category_id;
 
-    private String articleKeyword;
+    private String article_keyword;
 
-    private String articleImg;
+    private String article_img;
 
-    private String articleThumb;
+    private String article_thumb;
 
-    private Integer isTop;
+    private Integer is_top;
 
-    private Integer articleView;
+    private Integer article_view;
 
-    private Integer articleLove;
+    private Integer article_love;
 
     private Category category;
+    
+    private Userinfo userinfo;
+    
     public Category getCategory() {
 		return category;
 	}
@@ -34,99 +37,107 @@ public class Article {
 		this.category = category;
 	}
 
-	public Integer getArticleId() {
-        return articleId;
+	public Userinfo getUserinfo() {
+		return userinfo;
+	}
+
+	public void setUserinfo(Userinfo userinfo) {
+		this.userinfo = userinfo;
+	}
+
+	public Integer getArticle_id() {
+        return article_id;
     }
 
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
+    public void setArticle_id(Integer article_id) {
+        this.article_id = article_id;
     }
 
-    public String getArticleName() {
-        return articleName;
+    public String getArticle_name() {
+        return article_name;
     }
 
-    public void setArticleName(String articleName) {
-        this.articleName = articleName == null ? null : articleName.trim();
+    public void setArticle_name(String article_name) {
+        this.article_name = article_name == null ? null : article_name.trim();
     }
 
-    public String getArticleAuthor() {
-        return articleAuthor;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setArticleAuthor(String articleAuthor) {
-        this.articleAuthor = articleAuthor == null ? null : articleAuthor.trim();
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
-    public String getPublishTime() {
-        return publishTime;
+    public String getPublish_time() {
+        return publish_time;
     }
 
-    public void setPublishTime(String publishTime) {
-        this.publishTime = publishTime == null ? null : publishTime.trim();
+    public void setPublish_time(String publish_time) {
+        this.publish_time = publish_time == null ? null : publish_time.trim();
     }
 
-    public String getModifyTime() {
-        return modifyTime;
+    public String getModify_time() {
+        return modify_time;
     }
 
-    public void setModifyTime(String modifyTime) {
-        this.modifyTime = modifyTime == null ? null : modifyTime.trim();
+    public void setModify_time(String modify_time) {
+        this.modify_time = modify_time == null ? null : modify_time.trim();
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Integer getCategory_id() {
+        return category_id;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory_id(Integer category_id) {
+        this.category_id = category_id;
     }
 
-    public String getArticleKeyword() {
-        return articleKeyword;
+    public String getArticle_keyword() {
+        return article_keyword;
     }
 
-    public void setArticleKeyword(String articleKeyword) {
-        this.articleKeyword = articleKeyword == null ? null : articleKeyword.trim();
+    public void setArticle_keyword(String article_keyword) {
+        this.article_keyword = article_keyword == null ? null : article_keyword.trim();
     }
 
-    public String getArticleImg() {
-        return articleImg;
+    public String getArticle_img() {
+        return article_img;
     }
 
-    public void setArticleImg(String articleImg) {
-        this.articleImg = articleImg == null ? null : articleImg.trim();
+    public void setArticle_img(String article_img) {
+        this.article_img = article_img == null ? null : article_img.trim();
     }
 
-    public String getArticleThumb() {
-        return articleThumb;
+    public String getArticle_thumb() {
+        return article_thumb;
     }
 
-    public void setArticleThumb(String articleThumb) {
-        this.articleThumb = articleThumb == null ? null : articleThumb.trim();
+    public void setArticle_thumb(String article_thumb) {
+        this.article_thumb = article_thumb == null ? null : article_thumb.trim();
     }
 
-    public Integer getIsTop() {
-        return isTop;
+    public Integer getIs_top() {
+        return is_top;
     }
 
-    public void setIsTop(Integer isTop) {
-        this.isTop = isTop;
+    public void setIs_top(Integer is_top) {
+        this.is_top = is_top;
     }
 
-    public Integer getArticleView() {
-        return articleView;
+    public Integer getArticle_view() {
+        return article_view;
     }
 
-    public void setArticleView(Integer articleView) {
-        this.articleView = articleView;
+    public void setArticle_view(Integer article_view) {
+        this.article_view = article_view;
     }
 
-    public Integer getArticleLove() {
-        return articleLove;
+    public Integer getArticle_love() {
+        return article_love;
     }
 
-    public void setArticleLove(Integer articleLove) {
-        this.articleLove = articleLove;
+    public void setArticle_love(Integer article_love) {
+        this.article_love = article_love;
     }
 }
